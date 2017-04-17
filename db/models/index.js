@@ -16,7 +16,7 @@ const app = require('APP')
       OAuth: require('./oauth'),
       User: require('./user'),
       Product: require('./product'),
-      cartItem: require('./cartItem'),
+      CartItem: require('./cartItem'),
       // ---------- Add new models here ----------
     }
     , {mapValues} = require('lodash')
