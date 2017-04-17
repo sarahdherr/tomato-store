@@ -1,9 +1,9 @@
 'use strict'
 
 const db = require('APP/db')
-    , {User, Product, CartItem, Promise} = db
+    , {User, Product, Order, Promise} = db
     , {mapValues} = require('lodash')
-    , { tomatoes } = require('./seed_arrays')
+    , tomatoes = require('./seed_arrays')
 
 function seedEverything() {
   const seeded = {
@@ -11,7 +11,7 @@ function seedEverything() {
     products: products(),
   }
 
-  // seeded.cartItem = cartItem(seeded)
+  // seeded.order = order(seeded)
 
   return Promise.props(seeded)
 }
@@ -31,8 +31,8 @@ const users = seed(User, {
 
 const products = seed(Product, tomatoes)
 
-// We are not going to seed Orders, so not making cartItem join table
-// const cartItem = seed(CartItem,
+// We are not going to seed Orders, so not making order join table
+// const order = seed(Order,
 //   // We're specifying a function here, rather than just a rows object.
 //   // Using a function lets us receive the previously-seeded rows (the seed
 //   // function does this wiring for us).
@@ -67,7 +67,8 @@ const products = seed(Product, tomatoes)
 
 if (module === require.main) {
   db.didSync
-    .then(() => db.sync({force: true}))
+    .then(() => db.sync({force: false // changed this to false
+    }))
     .then(seedEverything)
     .finally(() => process.exit(0))
 }
@@ -96,6 +97,7 @@ class BadRow extends Error {
 // The function form can be used to initialize rows that reference
 // other models.
 function seed(Model, rows) {
+  console.log(rows)
   return (others={}) => {
     if (typeof rows === 'function') {
       rows = Promise.props(
@@ -110,6 +112,7 @@ function seed(Model, rows) {
       .then(rows => Promise.props(
         Object.keys(rows)
           .map(key => {
+            // console.log(row);
             const row = rows[key]
             return {
               key,
