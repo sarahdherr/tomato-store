@@ -3,6 +3,7 @@ import React from 'react'
 import {Router, Route, IndexRedirect, browserHistory} from 'react-router'
 import {render} from 'react-dom'
 import {connect, Provider} from 'react-redux'
+import axios from 'axios'
 
 import store from './store'
 import { fetchProducts } from './reducers/products'
@@ -27,6 +28,21 @@ import Navbar from './components/Navbar'
 //       {children}
 //     </div>
 // )
+// const onAppEnter = function(nextRouterState) {
+//   axios.get('/session')
+//     .then(session => {
+//       console.log("SESSION", session.data)
+//     })
+//     .catch(err => console.error(err))
+// }
+
+// const onJokeEnter = function(nextRouterState) {
+//   axios.get('/session')
+//     .then(session => {
+//       console.log("SESSION", session.data)
+//     })
+//     .catch(err => console.error(err))
+// }
 
 const onProductsEnter = function (nextRouterState) {
   store.dispatch(fetchProducts())
@@ -35,10 +51,10 @@ const onProductsEnter = function (nextRouterState) {
 render(
   <Provider store={store}>
     <Router history={browserHistory}>
-      <Route path="/" component={AppContainer} onEnter={onProductsEnter}>
+      <Route path="/" component={AppContainer} >
         <IndexRedirect to="/jokes" />
-        <Route path="/jokes" component={Jokes} />
-        <Route path="/products" component={ProductsContainer} />
+        <Route path="/jokes" component={Jokes}  />
+        <Route path="/products" component={ProductsContainer} onEnter={onProductsEnter}/>
       </Route>
       <Route path='*' component={NotFound} />
     </Router>

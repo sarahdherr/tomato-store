@@ -7,6 +7,7 @@ const {resolve} = require('path')
 const passport = require('passport')
 const PrettyError = require('pretty-error')
 const finalHandler = require('finalhandler')
+const session = require('express-session')
 // PrettyError docs: https://www.npmjs.com/package/pretty-error
 
 // Bones has a symlink from node_modules/APP to the root of the app.
@@ -35,9 +36,22 @@ prettyError.skipPackage('express')
 module.exports = app
   // Session middleware - compared to express-session (which is what's used in the Auther workshop), cookie-session stores sessions in a cookie, rather than some other type of session store.
   // Cookie-session docs: https://www.npmjs.com/package/cookie-session
-  .use(require('cookie-session')({
-    name: 'session',
-    keys: [process.env.SESSION_SECRET || 'an insecure secret key'],
+  // Removed vv when added the express-session. 
+  // .use(require('cookie-session')({
+  //   name: 'session',
+  //   keys: [process.env.SESSION_SECRET || 'an insecure secret key'],
+  // }))
+
+  .use(session({
+    secret: 'tomtom',
+    cookie: {},
+    resave: false,
+    saveUninitialized: true,
+    // store: {
+    //   cart: {cartInfo: "this is a cart"}
+    // }
+    
+    // cookie: { secure: true } -> for when we have an https:// website (recommended by npm docs)
   }))
 
   // Body parsing middleware
@@ -75,6 +89,8 @@ module.exports = app
     console.error(prettyError.render(err))
     finalHandler(req, res)(err)
   })
+
+
 
 if (module === require.main) {
   // Start listening only if we're the main module.
