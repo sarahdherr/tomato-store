@@ -7,8 +7,16 @@ const SingleView = (props) => {
   // WE THINK THAT WOULD JUST BE A CSS CLASS FOR GREYSCALE.
   // ALSO PENDING: MAKING A LINK TO THE CART VIEW
   function onClick(e) {
-   // ADD TO SESSION CART, AND THEN REDIRECT TO CART VIEW OR ALL PRODUCTS PAGES
+    // ADD TO SESSION CART, AND THEN REDIRECT TO CART VIEW OR ALL PRODUCTS PAGES
+    console.log('This is the event object: ', e)
   }
+  props = {
+    name: 'TomTom Tomato',
+    imageURL: 'https://www.ethno-botanik.org/Tomaten/Green_Sausage/Fotos/300/Green_Sausage_15.jpg',
+    price: 3,
+    quantity: 100,
+  }
+
   return (
           <div className="jumbotron">
             <h1>{ props.name }</h1>
@@ -20,3 +28,5 @@ const SingleView = (props) => {
           </div>
           )
 }
+
+export default SingleView
