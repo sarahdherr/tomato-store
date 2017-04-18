@@ -67,7 +67,7 @@ const products = seed(Product, tomatoes)
 
 if (module === require.main) {
   db.didSync
-    .then(() => db.sync({force: false // changed this to false
+    .then(() => db.sync({force: true // had changed this to false, nope not right
     }))
     .then(seedEverything)
     .finally(() => process.exit(0))
@@ -97,7 +97,6 @@ class BadRow extends Error {
 // The function form can be used to initialize rows that reference
 // other models.
 function seed(Model, rows) {
-  console.log(rows)
   return (others={}) => {
     if (typeof rows === 'function') {
       rows = Promise.props(
@@ -112,7 +111,6 @@ function seed(Model, rows) {
       .then(rows => Promise.props(
         Object.keys(rows)
           .map(key => {
-            // console.log(row);
             const row = rows[key]
             return {
               key,
