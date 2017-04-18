@@ -4,12 +4,11 @@ import {Link} from 'react-router';
 const Products = (props) => {
   const products = props.products || []
 
-
   return (
     <div className="products container-fluid" >
       <h1>Products</h1>
       {
-        products.length && products.map(product => {
+        products.map(product => {
           return (
             <div className="product-item col-lg-4 " key={product.id}>
             <Link to={`/products/${product.id}`}><img className="product-img" src={product.imageURL} /></Link>
