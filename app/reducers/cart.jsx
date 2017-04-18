@@ -21,13 +21,13 @@ export const getCart = cart => ({
   cart
 }) 
 
-const by = function(delta) {
+const changeBy = function(delta) {
   return (quantity) => {
     return (quantity || 0) + delta 
   }
 }
 
-const to = function(value) {
+const changeTo = function(value) {
   return (quantity) => {
     return value
   }
@@ -45,13 +45,15 @@ export const changeItemQuantity = (productId, mutator) =>
 
 export const fetchCart = () => 
   dispatch => {
-    const cartKeys = Object.keys(getCartLocal())
+    const cart = getCartLocal()
+    const cartKeys = Object.keys(cart)
 
     Promise.map(cartKeys, key => {
       return axios.get(`/api/products/${key}`)
 
     })
       .then(products => products.map(product => product.data))
+      .then(products => products.map(product => product.quantity = cart[product.id]))
       .then(products => dispatch(getCart(products)))
       .catch(err => console.error(err))
   }
@@ -70,8 +72,3 @@ const getCartLocal = function() {
 const setCartLocal = function(cart) {
   localStorage.setItem("cart", JSON.stringify(cart))
 }
-
-window.changeItemQuantity = changeItemQuantity
-window.fetchCart = fetchCart
-window.by = by
-window.to = to
