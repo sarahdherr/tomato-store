@@ -11,3 +11,14 @@ module.exports = require('express').Router()
       .then(products => res.send(products))
       .catch(next)
   })
+
+  .get('/:id', function(req, res, next) {
+  	Product.findById(+req.params.id) 
+  		.then(product => {
+  			console.log("INSIDE API ROUTE", product)
+  			res.send(product)
+  		})
+  		.catch(next)
+  })
+
+
