@@ -5,7 +5,7 @@ const Navbar = (props) => {
   return (
     <nav className="navbar navbar-default">
       <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <a className="navbar-brand" href="#">Home</a>
+        <Link to="/" className="navbar-brand">Home</Link>
 
       <ul className="nav navbar-nav">
         <li><Link to="#" activeClassName="active-link">Users</Link></li>
