@@ -2,6 +2,21 @@ import React, {Component} from 'react';
 import {Link} from 'react-router';
 
 const Navbar = (props) => {
+
+// DEMO - function to generate number of items in cart from local storage
+  // getCartSize = () => {
+  //   const cart = localStorage.cart
+  //   let cartSize = 0
+
+  //   for (var productId in cart) {
+  //     cartSize += cart[productId]
+  //   }
+
+  //   return cartSize
+  // }
+
+  const cartSize = 3
+
   return (
     <nav className="navbar navbar-default">
       <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -10,6 +25,7 @@ const Navbar = (props) => {
       <ul className="nav navbar-nav">
         <li><Link to="#" activeClassName="active-link">Users</Link></li>
         <li><Link to="/products" activeClassName="active-link">Products</Link></li>
+        <li><Link to="/cart" activeClassName="active-link"><span className="glyphicon glyphicon-shopping-cart"></span>{`(${cartSize})`}</Link></li>
       </ul>
 
       <form className="navbar-form navbar-right" role="search">
