@@ -1,0 +1,12 @@
+.product-img {
+	width: 100%;
+}
+
+.product-item {
+	display: inline;
+	float: left;
+}
+
+.product-item p {
+	text-align: center;
+}

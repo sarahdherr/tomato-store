@@ -10,7 +10,6 @@ const reducer = (state=initialState, action) => {
   switch (action.type) {
   case GET_PRODUCTS:
     return action.products;
-  
   }
 
   return state;

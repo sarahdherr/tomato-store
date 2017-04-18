@@ -35,10 +35,10 @@ const onProductsEnter = function (nextRouterState) {
 render(
   <Provider store={store}>
     <Router history={browserHistory}>
-      <Route path="/" component={AppContainer}>
+      <Route path="/" component={AppContainer} onEnter={onProductsEnter}>
         <IndexRedirect to="/jokes" />
         <Route path="/jokes" component={Jokes} />
-        <Route path="/products" component={ProductsContainer} onEnter={onProductsEnter} />
+        <Route path="/products" component={ProductsContainer} />
       </Route>
       <Route path='*' component={NotFound} />
     </Router>

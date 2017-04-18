@@ -8,8 +8,8 @@ const Navbar = (props) => {
         <a className="navbar-brand" href="#">Home</a>
 
       <ul className="nav navbar-nav">
-        <li className="active"><Link to="#">Users <span className="sr-only">(current)</span></Link></li>
-        <li><Link to="#" >Products</Link></li>
+        <li className="active"><Link to="#">Users</Link></li>
+        <li><Link to="/products" >Products</Link></li>
       </ul>
 
       <form className="navbar-form navbar-right" role="search">
