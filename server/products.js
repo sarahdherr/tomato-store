@@ -18,3 +18,14 @@ module.exports = require('express').Router()
   	  })
       .catch(next)
   })
+
+  .get('/:id', function(req, res, next) {
+  	Product.findById(+req.params.id) 
+  		.then(product => {
+  			console.log("INSIDE API ROUTE", product)
+  			res.send(product)
+  		})
+  		.catch(next)
+  })
+
+

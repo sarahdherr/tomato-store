@@ -3,7 +3,7 @@ import {Link} from 'react-router';
 
 const Navbar = (props) => {
 
-// DEMO - function to generate number of items in cart from local storage
+// function to generate number of items in cart from local storage
   // getCartSize = () => {
   //   const cart = localStorage.cart
   //   let cartSize = 0
@@ -15,7 +15,7 @@ const Navbar = (props) => {
   //   return cartSize
   // }
 
-  const cartSize = 3
+  const cartSize = getCartSize();
 
   return (
     <nav className="navbar navbar-default">
