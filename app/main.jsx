@@ -17,33 +17,6 @@ import WhoAmI from './components/WhoAmI'
 import NotFound from './components/NotFound'
 import Navbar from './components/Navbar'
 
-// const ExampleApp = connect(
-//   ({ auth }) => ({ user: auth })
-// )(
-//   ({ user, children }) =>
-//     <div>
-//       <nav>
-//         {user ? <WhoAmI/> : <Login/>}
-//       </nav>
-//       {children}
-//     </div>
-// )
-// const onAppEnter = function(nextRouterState) {
-//   axios.get('/session')
-//     .then(session => {
-//       console.log("SESSION", session.data)
-//     })
-//     .catch(err => console.error(err))
-// }
-
-// const onJokeEnter = function(nextRouterState) {
-//   axios.get('/session')
-//     .then(session => {
-//       console.log("SESSION", session.data)
-//     })
-//     .catch(err => console.error(err))
-// }
-
 const onProductsEnter = function (nextRouterState) {
   store.dispatch(fetchProducts())
 }
