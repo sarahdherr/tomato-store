@@ -15,7 +15,8 @@ const Navbar = (props) => {
   //   return cartSize
   // }
 
-  const cartSize = getCartSize();
+  // const cartSize = getCartSize();
+  const cartSize = 3
 
   return (
     <nav className="navbar navbar-default">
