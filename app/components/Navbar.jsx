@@ -1,22 +1,10 @@
-import React, {Component} from 'react';
-import {Link} from 'react-router';
+import React, {Component} from 'react'
+import {Link} from 'react-router'
+import store from 'APP/app/store'
+import { getCartSize } from 'APP/app/reducers/cart'
 
 const Navbar = (props) => {
-
-// function to generate number of items in cart from local storage
-  // getCartSize = () => {
-  //   const cart = localStorage.cart
-  //   let cartSize = 0
-
-  //   for (var productId in cart) {
-  //     cartSize += cart[productId]
-  //   }
-
-  //   return cartSize
-  // }
-
-  // const cartSize = getCartSize();
-  const cartSize = 3
+  const cartSize = store.dispatch(getCartSize())
 
   return (
     <nav className="navbar navbar-default">
@@ -41,7 +29,7 @@ const Navbar = (props) => {
   )
 }
 
-export default Navbar;
+export default Navbar
 
 // If we want a collapsable hamburger:
 // <div className="container-fluid">
