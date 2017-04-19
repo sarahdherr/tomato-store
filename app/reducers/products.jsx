@@ -1,11 +1,8 @@
 import axios from 'axios'
 
-const initialState = {
-  products: []
-}
 
 // Products reducer
-const reducer = (state=initialState, action) => {
+const reducer = (state=[], action) => {
   
   switch (action.type) {
   case GET_PRODUCTS:
