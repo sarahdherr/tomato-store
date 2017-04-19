@@ -1,18 +1,19 @@
 'use strict'
 
-const {STRING, INTEGER} = require('sequelize')
+const {STRING, INTEGER, TEXT} = require('sequelize')
 
 module.exports = db => db.define('product', {
   name: {
     type: STRING,
     allowNull: false
   },
+  description: TEXT,
   price: INTEGER,
   nutritionFacts: STRING,
-  quantity: INTEGER,
+  inventory: INTEGER,
   imageURL: STRING
 })
 
-module.exports.associations = (Product, {User, Order}) => {
-  Product.belongsToMany(User, {as: 'cartItem', through: Order})
+module.exports.associations = (Product, {Order, OrderItem}) => {
+  Product.belongsToMany(Order, {through: OrderItem})
 }
