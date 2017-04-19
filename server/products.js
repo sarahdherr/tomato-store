@@ -2,6 +2,7 @@
 
 'use strict'
 
+const debug = require('debug')('products')
 const db = require('APP/db')
 const Product = db.model('product')
 
@@ -10,22 +11,21 @@ module.exports = require('express').Router()
     Product.findAll()
       .then(products => res.send(products))
       .catch(next)
-  }) 
+  })
   .get('/:id', function(req, res, next) {
     Product.findById(req.params.id)
-  	  .then(product => {
-  	  	res.send(product)
-  	  })
+      .then(product => {
+        res.send(product)
+      })
       .catch(next)
   })
-
   .get('/:id', function(req, res, next) {
-  	Product.findById(+req.params.id) 
-  		.then(product => {
-  			console.log("INSIDE API ROUTE", product)
-  			res.send(product)
-  		})
-  		.catch(next)
+    Product.findById(+req.params.id)
+    .then(product => {
+      debug('INSIDE API ROUTE', product)
+      res.send(product)
+    })
+    .catch(next)
   })
 
 

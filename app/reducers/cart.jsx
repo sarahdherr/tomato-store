@@ -3,7 +3,6 @@ import Promise from 'bluebird'
 
 // Cart reducer
 const reducer = (state={}, action) => {
-  
   switch (action.type) {
   case GET_CART:
     return action.cart;
@@ -23,7 +22,7 @@ export const getCart = cart => ({
 
 const changeBy = function(delta) {
   return (quantity) => {
-    return (quantity || 0) + delta 
+    return (quantity || 0) + delta
   }
 }
 
@@ -41,6 +40,7 @@ export const changeItemQuantity = (productId, mutator) =>
 
     if (cart[productId] < 1) delete cart[productId]
     setCartLocal(cart)
+    dispatch(fetchCart())
   }
 
 export const fetchCart = () => 
@@ -61,6 +61,7 @@ export const fetchCart = () =>
 
 export default reducer
 
+const localStorage = window.localStorage
 const getCartLocal = function() {
   if (localStorage.cart) {
     return JSON.parse(localStorage.cart)
@@ -70,5 +71,5 @@ const getCartLocal = function() {
 }
 
 const setCartLocal = function(cart) {
-  localStorage.setItem("cart", JSON.stringify(cart))
+  localStorage.setItem('cart', JSON.stringify(cart))
 }
