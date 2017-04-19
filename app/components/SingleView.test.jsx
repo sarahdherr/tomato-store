@@ -4,6 +4,7 @@ chai.use(require('chai-enzyme')())
 import {shallow} from 'enzyme'
 import SingleView from './SingleView'
 
+/* global describe it beforeEach */
 describe('<SingleView />', () => {
   const tomato = {
     name: 'TomTom Tomato',
