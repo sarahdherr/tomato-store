@@ -14,6 +14,6 @@ module.exports = db => db.define('product', {
   imageURL: STRING
 })
 
-module.exports.associations = (Product, {Order}) => {
-  Product.hasMany(Order)
+module.exports.associations = (Product, {Order, OrderItem}) => {
+  Product.belongsToMany(Order, {through: OrderItem})
 }
