@@ -16,11 +16,11 @@ const SingleView = ({name, imageURL, price, quantity, nutritionFacts}) => {
             <h1>{ name }</h1>
             <img src={ imageURL } />
             <p>${price}</p>
-            <p>{`Reamaining stock is only... ${quantity}`}</p>
-            <p>{`NutritionFacts pending: ${nutritionFacts}`}</p>
+            <p>Remaining stock is only... {quantity}</p>
+            {/* <p>NutritionFacts pending: {nutritionFacts}</p> */}
             <p><a className="btn btn-primary btn-lg" onClick= { onClick }>Add To Cart</a></p>
           </div>
-        )
+  )
 }
 
 export default SingleView

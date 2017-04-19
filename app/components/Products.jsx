@@ -1,11 +1,8 @@
-import React from 'react';
-import {Link} from 'react-router';
+import React from 'react'
+import {Link} from 'react-router'
 
-const Products = (props) => {
-  const products = props.products || []
-
-  return (
-    <div className="products container-fluid" >
+const Products = ({products=[]}) =>
+    <div className="products container-fluid">
       <h1>Products</h1>
       {
         products.map(product => {
@@ -16,9 +13,6 @@ const Products = (props) => {
           </div>)
         })
       }
-      
     </div>
-  )
-}
 
-export default Products;
+export default Products
