@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import SingleView from '../components/SingleView'
+import Product from '../components/Product'
 
 const mapStateToProps = (state) => {
   return state.product
@@ -7,4 +7,4 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = null
 
-export default connect(mapStateToProps, mapDispatchToProps)(SingleView)
+export default connect(mapStateToProps, mapDispatchToProps)(Product)
