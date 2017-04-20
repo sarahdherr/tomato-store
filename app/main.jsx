@@ -12,7 +12,7 @@ import { fetchCart } from './reducers/cart'
 
 import AppContainer from './containers/AppContainer'
 import ProductsContainer from './containers/ProductsContainer'
-import SingleViewContainer from './containers/SingleViewContainer'
+import ProductContainer from './containers/ProductContainer'
 import CartContainer from './containers/CartContainer'
 
 import Jokes from './components/Jokes'
@@ -39,7 +39,7 @@ const onProductsEnter = (nextRouterState, _, done) => {
   .then(done)
 }
 
-const onSingleViewEnter = (nextRouterState, _, done) => {
+const onProductEnter = (nextRouterState, _, done) => {
   store.dispatch(fetchProduct(nextRouterState.params.id))
     .then(done)
 }
