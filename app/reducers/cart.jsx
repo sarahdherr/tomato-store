@@ -1,22 +1,29 @@
 import axios from 'axios'
 import Promise from 'bluebird'
 
+const initialState = {
+  list: []
+}
+
 // Cart reducer
-const reducer = (state={}, action) => {
+const reducer = (state=initialState, action) => {
+  const newState = Object.assign({}, state)
   switch (action.type) {
-  case GET_CART:
-    return action.cart
+  case GOT_CART:
+    newState.list = action.cart
+    break
   }
 
-  return state
+  return newState
 }
 
 // Cart constants
-const GET_CART = 'GET_CART'
+const GOT_CART = 'GOT_CART'
 
 // Cart action creators
-export const getCart = cart => ({
-  type: GET_CART,
+// gotCart takes a cart [{quantity: int, product{}}, ...] and triggers the cart reducer with action type GOT_CART
+export const gotCart = cart => ({
+  type: GOT_CART,
   cart
 })
 
@@ -51,6 +58,7 @@ export const changeItemQuantity = (productId) =>
     dispatch(fetchCart())
   }
 
+// Later should figure out how to make this dispatch an action creator without breaking everything
 export const getCartSize = () =>
   dispatch => {
     const cart = getCartLocal()
@@ -64,16 +72,31 @@ export const getCartSize = () =>
 
 export const fetchCart = () =>
   dispatch => {
-    const cart = getCartLocal()
-    const cartKeys = Object.keys(cart)
+    const uxCart = getCartLocal()
+    const cartKeys = Object.keys(uxCart)
 
     Promise.map(cartKeys, key => {
       return axios.get(`/api/products/${key}`)
     })
-      .then(products => products.map(product => product.data))
-      .then(products => products.map(product => product.quantity = cart[product.id]))
-      .then(products => dispatch(getCart(products)))
+      .then(products => {
+        return products.map(product => product.data)
+      })
+      .then(products => {
+        // output from here will be a formatted cart in format [{qty: int, product: {from db}}, ...]
+        return products.map(product => ({quantity: uxCart[product.id], product}))
+      })
+      .then(formattedCart => {
+        dispatch(gotCart(formattedCart))
+      })
       .catch(err => console.error(err))
+  }
+
+export const checkoutCart = (cart) =>
+  dispatch => {
+    axios.post('api/orders', { cart })
+    .then(() => setCartLocal({})) // wipeout cart on localStorage
+    .then(() => dispatch(gotCart({}))) // wipout cart on redux state
+    .catch(err => console.error(err))
   }
 
 export default reducer
@@ -87,6 +110,8 @@ const getCartLocal = function() {
   }
 }
 
+// Temporary Helper function takes a whole cart object of the form:
+// { prdId1:  qty1, prdId2: qty2, ... }
 const setCartLocal = function(cart) {
   localStorage.setItem('cart', JSON.stringify(cart))
 }
