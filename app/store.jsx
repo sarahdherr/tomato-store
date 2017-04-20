@@ -20,4 +20,4 @@ export default store
 
 // Set the auth info at start
 store.dispatch(whoami())
-
+window.store = store
