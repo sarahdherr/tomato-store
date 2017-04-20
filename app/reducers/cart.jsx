@@ -58,6 +58,7 @@ export const changeItemQuantity = (productId) =>
     dispatch(fetchCart())
   }
 
+// Later should figure out how to make this dispatch an action creator without breaking everything
 export const getCartSize = () =>
   dispatch => {
     const cart = getCartLocal()
@@ -114,7 +115,3 @@ const getCartLocal = function() {
 const setCartLocal = function(cart) {
   localStorage.setItem('cart', JSON.stringify(cart))
 }
-
-window.changeItemQuantity = changeItemQuantity
-window.changeTo = changeTo
-window.fetchCart = fetchCart

@@ -7,7 +7,7 @@ const Cart = (props) => {
     props.checkoutCart(props.cart)
   }
   // TODOD:  + - Bttns to Quatntity td in table.
-  console.log(props)
+  // console.log(props)
   return (
     <div>
     <h2>Cart</h2>

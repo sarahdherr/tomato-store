@@ -21,18 +21,6 @@ import WhoAmI from './components/WhoAmI'
 import NotFound from './components/NotFound'
 import Navbar from './components/Navbar'
 
-// const ExampleApp = connect(
-//   ({ auth }) => ({ user: auth })
-// )(
-//   ({ user, children }) =>
-//     <div>
-//       <nav>
-//         {user ? <WhoAmI/> : <Login/>}
-//       </nav>
-//       {children}
-//     </div>
-// )
-
 // onEnter takes three arguments in order to prevent route rendering until onEnter has finished. This prevents you from hitting an incomplete state during route render.
 const onProductsEnter = (nextRouterState, _, done) => {
   store.dispatch(fetchProducts())
@@ -55,7 +43,7 @@ render(
       <Route path="/" component={AppContainer} >
         <IndexRedirect to="/products" />
         <Route path="/products" component={ProductsContainer} onEnter={onProductsEnter} />
-        <Route path="/products/:id" component={SingleViewContainer} onEnter={onSingleViewEnter} />
+        <Route path="/products/:id" component={ProductContainer} onEnter={onProductEnter} />
         <Route path="/cart" component={CartContainer} onEnter={onCartEnter} />
       </Route>
       <Route path='*' component={NotFound} />
