@@ -20,25 +20,46 @@ export const getCart = cart => ({
   cart
 })
 
-const changeBy = function(delta) {
-  return (quantity) =>
-    (quantity || 0) + delta
-}
+// export const changeBy = function(delta) {
+//   return (quantity) => {
+//     return (quantity || 0) + delta
+//   }
+// }
 
-const changeTo = function(value) {
-  return (quantity) =>
-    value
-}
+// const changeTo = function(value) {
+//   return (quantity) => {
+//     return value
+//   }
+// }
 
 // Dispatchers
-export const changeItemQuantity = (productId, mutator) =>
+// export const changeItemQuantity = (productId, mutator) =>
+//   dispatch => {
+//     const cart = getCartLocal()
+//     cart[productId] = mutator(cart[productId])
+//     if (cart[productId] < 1) delete cart[productId]
+//     setCartLocal(cart)
+//     dispatch(fetchCart())
+//   }
+
+export const changeItemQuantity = (productId) =>
   dispatch => {
     const cart = getCartLocal()
-    cart[productId] = mutator(cart[productId])
-
+    !cart[productId] ? cart[productId] = 1 : cart[productId]++
     if (cart[productId] < 1) delete cart[productId]
     setCartLocal(cart)
     dispatch(fetchCart())
+  }
+
+export const getCartSize = () =>
+  dispatch => {
+    const cart = getCartLocal()
+    let cartSize = 0
+
+    for (var productId in cart) {
+      cartSize += cart[productId]
+    }
+    return cartSize
   }
 
 export const fetchCart = () =>
@@ -54,6 +75,7 @@ export const fetchCart = () =>
       .then(products => dispatch(getCart(products)))
       .catch(err => console.error(err))
   }
+
 export const checkoutCart = (cart) =>
   dispatch => {
     axios.post('api/orders', { cart })

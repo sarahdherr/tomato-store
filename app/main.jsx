@@ -11,7 +11,7 @@ import { fetchProduct } from './reducers/product'
 
 import AppContainer from './containers/AppContainer'
 import ProductsContainer from './containers/ProductsContainer'
-import SingleViewContainer from './containers/SingleViewContainer'
+import ProductContainer from './containers/ProductContainer'
 
 import Jokes from './components/Jokes'
 import Login from './components/Login'
@@ -37,7 +37,7 @@ const onProductsEnter = (nextRouterState, _, done) => {
   .then(done)
 }
 
-const onSingleViewEnter = (nextRouterState, _, done) => {
+const onProductEnter = (nextRouterState, _, done) => {
   store.dispatch(fetchProduct(nextRouterState.params.id))
     .then(done)
 }
@@ -48,7 +48,7 @@ render(
       <Route path="/" component={AppContainer} >
         <IndexRedirect to="/products" />
         <Route path="/products" component={ProductsContainer} onEnter={onProductsEnter} />
-        <Route path="/products/:id" component={SingleViewContainer} onEnter={onSingleViewEnter} />
+        <Route path="/products/:id" component={ProductContainer} onEnter={onProductEnter} />
       </Route>
       <Route path='*' component={NotFound} />
     </Router>
