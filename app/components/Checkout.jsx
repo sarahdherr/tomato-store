@@ -12,12 +12,8 @@ export default class Checkout extends Component {
       zip: ''
     }
 
-    this.onClick = this.onClick.bind(this)
     this.handleChange = this.handleChange.bind(this)
-  }
-
-  onClick = function(e) {
-    console.log('This is the event object: ', e)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   handleChange = function(e) {
@@ -25,8 +21,12 @@ export default class Checkout extends Component {
     this.setState({
       [e.target.name]: e.target.value
     })
-    console.log('state', this.state)
     // set orderId to req.body.orderId
+  }
+
+  handleSubmit = function(e) {
+    e.preventDefault()
+    this.props.handleSubmitOrder(this.state)
   }
 
   render() {
@@ -34,29 +34,76 @@ export default class Checkout extends Component {
       <div>
       <form className="form-horizontal" >
         <fieldset>
-        <legend>Shipping Info</legend>
-        <div className="form-group">
-          <label className="col-lg-2 control-label">Name</label>
-          <div className="col-lg-4">
-            <input type="text"
-                    className="form-control"
-                    id="inputEmail"
-                    placeholder="name"
-                    onChange={ this.handleChange}
-                    name="name" />
+          <legend>Shipping Info</legend>
+          <div className="form-group">
+            <label className="col-lg-2 control-label">Name</label>
+            <div className="col-lg-4">
+              <input type="text"
+                      className="form-control"
+                      placeholder="name"
+                      onChange={ this.handleChange}
+                      name="name" />
+            </div>
           </div>
-        </div>
-        Address: <input type="text" name="address" onChange={ this.handleChange} /><br />
-        City: <input type="text" name="city" /><br />
-        State: <input type="text" name="state" /><br />
-        Zip: <input type="text" name="zip" /><br />
-        Email: <input type="text" name="email" /><br />
-        <input type="submit" value="Submit" />
-      <label>Order Review</label>
-      {/*  information */}
+          <div className="form-group">
+            <label className="col-lg-2 control-label">Address</label>
+            <div className="col-lg-4">
+              <input type="text"
+                      className="form-control"
+                      placeholder="address"
+                      onChange={ this.handleChange}
+                      name="address" />
+            </div>
+          </div>
+          <div className="form-group">
+            <label className="col-lg-2 control-label">City</label>
+            <div className="col-lg-4">
+              <input type="text"
+                      className="form-control"
+                      placeholder="city"
+                      onChange={ this.handleChange}
+                      name="city" />
+            </div>
+          </div>
+          <div className="form-group">
+            <label className="col-lg-2 control-label">State</label>
+            <div className="col-lg-4">
+              <input type="text"
+                      className="form-control"
+                      placeholder="state"
+                      onChange={ this.handleChange}
+                      name="state" />
+            </div>
+          </div>
+          <div className="form-group">
+            <label className="col-lg-2 control-label">Zip</label>
+            <div className="col-lg-4">
+              <input type="text"
+                      className="form-control"
+                      placeholder="zip"
+                      onChange={ this.handleChange}
+                      name="zip" />
+            </div>
+          </div>
+          <div className="form-group">
+            <label className="col-lg-2 control-label">Email Address</label>
+            <div className="col-lg-4">
+              <input type="text"
+                      className="form-control"
+                      placeholder="email"
+                      onChange={ this.handleChange}
+                      name="email" />
+            </div>
+          </div>
+          <input type="submit" value="Submit Address" onClick={console.log('Address Confirmed')} />
+        {/*  information */}
         </fieldset>
+        <legend>Payment Info</legend>
+        <input type="submit" value="Paypal" onClick={this.handlePaymentSubmit}/>
+        <br />
+        <hr />
+        <input type="submit" value="Submit" onClick={this.handleSubmit}/>
       </form>
-      <button onClick={this.props.handlePaymentSubmit}>Pay Pal</button>
       </div>
     )
   }
