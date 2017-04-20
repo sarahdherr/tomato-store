@@ -4,7 +4,7 @@ import { checkoutCart } from '../reducers/cart'
 
 const mapStateToProps = (state) => {
   return {
-    cart: state.cart
+    cart: state.cart.list
   }
 }
 

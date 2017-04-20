@@ -8,6 +8,7 @@ import axios from 'axios'
 import store from './store'
 import { fetchProducts } from './reducers/products'
 import { fetchProduct } from './reducers/product'
+import { fetchCart } from './reducers/cart'
 
 import AppContainer from './containers/AppContainer'
 import ProductsContainer from './containers/ProductsContainer'
@@ -43,6 +44,11 @@ const onSingleViewEnter = (nextRouterState, _, done) => {
     .then(done)
 }
 
+// we deleted _ and done from the arguments and didnt use .then(done) after the dispatch because it would not work. Error was dispatch is not a function so we cant call .then off of it. Unsure why this is happening, will come back to...maybe.
+const onCartEnter = (nextRouterState) => {
+  store.dispatch(fetchCart())
+}
+
 render(
   <Provider store={store}>
     <Router history={browserHistory}>
@@ -50,7 +56,7 @@ render(
         <IndexRedirect to="/products" />
         <Route path="/products" component={ProductsContainer} onEnter={onProductsEnter} />
         <Route path="/products/:id" component={SingleViewContainer} onEnter={onSingleViewEnter} />
-        <Route path="/cart" component={CartContainer} />
+        <Route path="/cart" component={CartContainer} onEnter={onCartEnter} />
       </Route>
       <Route path='*' component={NotFound} />
     </Router>

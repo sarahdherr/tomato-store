@@ -1,14 +1,20 @@
 import axios from 'axios'
 import Promise from 'bluebird'
 
+const initialState = {
+  list: []
+}
+
 // Cart reducer
-const reducer = (state={}, action) => {
+const reducer = (state=initialState, action) => {
+  const newState = Object.assign({}, state)
   switch (action.type) {
   case GOT_CART:
-    return action.cart
+    newState.list = action.cart
+    break
   }
 
-  return state
+  return newState
 }
 
 // Cart constants
@@ -87,5 +93,6 @@ const setCartLocal = function(cart) {
   localStorage.setItem('cart', JSON.stringify(cart))
 }
 
-window.changeItemQuantity = changeItemQuantity;
+window.changeItemQuantity = changeItemQuantity
 window.changeTo = changeTo
+window.fetchCart = fetchCart
