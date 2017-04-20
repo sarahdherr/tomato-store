@@ -7,7 +7,7 @@ const Cart = (props) => {
     props.checkoutCart(props.cart)
   }
   // TODOD:  + - Bttns to Quatntity td in table.
-
+  console.log(props)
   return (
     <div>
     <h2>Cart</h2>
@@ -21,12 +21,12 @@ const Cart = (props) => {
         </thead>
         <tbody>
         {
-          props.cart.map(row =>
+          props.cart && props.cart.map(row =>
             (
               <tr key={row.product.id}>
                 <td>{row.product.name}</td>
                 <td>{row.quantity}</td>
-                <td>{row.product.subtotal}</td>
+                <td>${row.quantity * row.product.price}</td>
               </tr>
             )
           )
