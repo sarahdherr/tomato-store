@@ -12,6 +12,7 @@ import { fetchProduct } from './reducers/product'
 import AppContainer from './containers/AppContainer'
 import ProductsContainer from './containers/ProductsContainer'
 import ProductContainer from './containers/ProductContainer'
+import CheckoutContainer from './containers/CheckoutContainer'
 
 import Jokes from './components/Jokes'
 import Login from './components/Login'
@@ -49,6 +50,7 @@ render(
         <IndexRedirect to="/products" />
         <Route path="/products" component={ProductsContainer} onEnter={onProductsEnter} />
         <Route path="/products/:id" component={ProductContainer} onEnter={onProductEnter} />
+        <Route path="/checkout" component={CheckoutContainer} />
       </Route>
       <Route path='*' component={NotFound} />
     </Router>

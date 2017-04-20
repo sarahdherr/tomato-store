@@ -3,28 +3,28 @@ import axios from 'axios'
 // Products reducer
 const reducer = (state={}, action) => {
   switch (action.type) {
-  case GET_PRODUCT:
-    return action.product
+  case CREATE_GUEST:
+    return action.guest
   }
 
   return state
 }
 
 // Products constants
-const GET_PRODUCT = 'GET_PRODUCT'
+const CREATE_GUEST = 'CREATE_GUEST'
 
 // Products action creators
-export const getProduct = product => ({
-  type: GET_PRODUCT,
-  product
+export const createGuest = guest => ({
+  type: CREATE_GUEST,
+  guest
 })
 
 // Dispatchers
-export const fetchProduct = (id) =>
+export const postGuest = (id) =>
   dispatch =>
-    axios.get(`/api/products/${id}`)
+    axios.post(`/api/guests`)
       .then(response => {
-        dispatch(getProduct(response.data))
+        dispatch(postGuest(response.data))
       })
       .catch(err => console.error(err))
 
