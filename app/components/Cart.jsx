@@ -1,35 +1,43 @@
 import React from 'react'
 import { Link } from 'react-router'
 
+  /* global dispatch*/
 const Cart = (props) => {
-  function onClick(e) {
-    console.log('This is the event object: ', e)
+  function handleCheckout(e) {
+    props.checkoutCart(props.cart)
   }
+  // TODOD:  + - Bttns to Quatntity td in table.
 
   return (
-        <div>
-        <h2>Cart</h2>
-          <table className="table table-striped table-hover ">
-            <thead>
-              <tr>
-                <th>Item</th>
-                <th>Quantity</th>
-                <th>Subtotal</th>
+    <div>
+    <h2>Cart</h2>
+      <table className="table table-striped table-hover ">
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>Quantity</th>
+            <th>Subtotal</th>
+          </tr>
+        </thead>
+        <tbody>
+        {
+          props.cart.map(row =>
+            (
+              <tr key={row.product.id}>
+                <td>{row.product.name}</td>
+                <td>{row.quantity}</td>
+                <td>{row.product.subtotal}</td>
               </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Column content</td>
-                <td>Column content</td>
-                <td>Column content</td>
-              </tr>
-            </tbody>
-          </table> 
+            )
+          )
+        }
+        </tbody>
+      </table>
 
-          <button>Proceed to Checkout</button>
-          <button>Continue Shopping</button>
-        </div>
-        )
+      <Link to='/checkout'><button onClick={ handleCheckout }>Proceed to Checkout</button></Link>
+      <Link to='/products'><button >Continue Shopping</button></Link>
+    </div>
+  )
 }
 
 export default Cart
