@@ -2,7 +2,6 @@ import axios from 'axios'
 
 // Products reducer
 const reducer = (state={}, action) => {
-  
   switch (action.type) {
   case GET_PRODUCT:
     return action.product
@@ -21,11 +20,12 @@ export const getProduct = product => ({
 })
 
 // Dispatchers
-export const fetchProduct = (id) => 
-  dispatch => 
+export const fetchProduct = (id) =>
+  dispatch =>
     axios.get(`/api/products/${id}`)
       .then(response => {
-        dispatch(getProduct(response.data))})
+        dispatch(getProduct(response.data))
+      })
       .catch(err => console.error(err))
 
 export default reducer
