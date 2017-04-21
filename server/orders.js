@@ -5,7 +5,7 @@ const Order = db.model('order')
 const OrderItem = db.model('order_item')
 const Promise = require('bluebird')
 
-const fakeReqBody =  {cart: [{quantity: 2, product: {id: 1}}, {quantity: 1, product: {id: 2}}]}
+// const fakeReqBody =  {cart: [{quantity: 2, product: {id: 1}}, {quantity: 1, product: {id: 2}}]}
 
 module.exports = require('express').Router()
   // Adds an order with all the order items to the Order and OrderItem models
@@ -13,18 +13,18 @@ module.exports = require('express').Router()
     // req.body.cart = [{quantity: int, product: {}}, ...]
     Order.create({})
     .then(order => {
-      const orderPromises = fakeReqBody.cart.map(cart_row => {
+      const orderPromises = req.body.cart.map(cartRow => {
         OrderItem.create({
           order_id: order.id,
-          quantity: cart_row.quantity,
-          product_id: cart_row.product.id
+          quantity: cartRow.quantity,
+          product_id: cartRow.product.id
         })
       })
       return Promise.all(orderPromises)
+      .then(() => order.id)
     })
-    .then(orderArrOfNulls => {
-      res.end()
-      console.log("You have made a new order of " + orderArrOfNulls.length + " item(s).")
+    .then(orderId => {
+      res.send(orderId)
     })
     .catch(next)
   })

@@ -2,7 +2,8 @@ import axios from 'axios'
 import Promise from 'bluebird'
 
 const initialState = {
-  list: []
+  list: [],
+  orderId: 0
 }
 
 // Cart reducer
@@ -12,6 +13,10 @@ const reducer = (state=initialState, action) => {
   case GOT_CART:
     newState.list = action.cart
     break
+
+  case GOT_ORDER_ID:
+    newState.orderId = action.orderId
+    break
   }
 
   return newState
@@ -19,12 +24,18 @@ const reducer = (state=initialState, action) => {
 
 // Cart constants
 const GOT_CART = 'GOT_CART'
+const GOT_ORDER_ID = 'GOT_ORDER_ID'
 
 // Cart action creators
 // gotCart takes a cart [{quantity: int, product{}}, ...] and triggers the cart reducer with action type GOT_CART
 export const gotCart = cart => ({
   type: GOT_CART,
   cart
+})
+
+export const gotOrderId = orderId => ({
+  type: GOT_ORDER_ID,
+  orderId
 })
 
 // export const changeBy = function(delta) {
@@ -91,11 +102,19 @@ export const fetchCart = () =>
       .catch(err => console.error(err))
   }
 
+// WILL BE MOVED TO CONFIRMATION PAGE, WIPES OUT ORDER DATA
+// export const checkoutCart = (cart) =>
+//   dispatch => {
+//     axios.post('api/orders', { cart })
+//     .then(() => setCartLocal({})) // wipeout cart on localStorage
+//     .then(() => dispatch(gotCart({}))) // wipout cart on redux state
+//     .catch(err => console.error(err))
+//   }
+
 export const checkoutCart = (cart) =>
   dispatch => {
     axios.post('api/orders', { cart })
-    .then(() => setCartLocal({})) // wipeout cart on localStorage
-    .then(() => dispatch(gotCart({}))) // wipout cart on redux state
+    .then((orderId) => dispatch(gotOrderId(orderId)))
     .catch(err => console.error(err))
   }
 
