@@ -29,7 +29,7 @@ module.exports = require('express').Router()
     .catch(next)
   })
 
-  // Gets an order based on the order id and returns all the order item data
+  // Gets all order items based on the order id and returns all the order item data
   .get('/:orderId', function(req, res, next) {
     OrderItem.findAll({
       where: {
@@ -39,3 +39,10 @@ module.exports = require('express').Router()
     .then(orders => res.send(orders))
     .catch(next)
   })
+
+  // Get an individual order   /orders/status/id
+  .get('/status/:orderId', (req, res, next) =>
+    Order.findById(req.params.orderId)
+    .then(order => res.send(order.status))
+    .catch(next)
+    )

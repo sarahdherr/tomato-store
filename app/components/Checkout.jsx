@@ -32,7 +32,7 @@ export default class Checkout extends Component {
   render() {
     return (
       <div>
-      <form className="form-horizontal" >
+      <form id="guest-address" className="form-horizontal" onSubmit={this.handleSubmit}>
         <fieldset>
           <legend>Shipping Info</legend>
           <div className="form-group">
@@ -95,17 +95,17 @@ export default class Checkout extends Component {
                       name="email" />
             </div>
           </div>
-          <input type="submit" value="Submit Address" onClick={console.log('Address Confirmed')} />
+          <button type="submit" form="guest-address" value="Submit"> Submit Address </button>
         {/*  information */}
         </fieldset>
         <legend>Payment Info</legend>
         <input type="submit" value="Paypal" onClick={this.handlePaymentSubmit}/>
         <br />
         <hr />
-        <Link to={`/receipt/${this.props.orderId}`}>
-          <input type="submit" value="Submit" onClick={this.handleSubmit}/>
-          </Link>
       </form>
+      <Link to='/receipt/1'>
+        <button>Submit Order</button>
+      </Link>
       </div>
     )
   }
@@ -114,4 +114,4 @@ export default class Checkout extends Component {
        // redirect to Register Page 
        //<button>Register</button> 
 
-       // <button>Login</button>*/ 
+       // <button>Login</button>*/
