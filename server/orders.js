@@ -2,10 +2,11 @@
 
 const db = require('APP/db')
 const Order = db.model('order')
+const Product = db.model('product')
 const OrderItem = db.model('order_item')
 const Promise = require('bluebird')
 
-const fakeReqBody =  {cart: [{quantity: 2, product: {id: 1}}, {quantity: 1, product: {id: 2}}]}
+const fakeReqBody =  { cart: [{quantity: 2, product: {id: 1}}, {quantity: 1, product: {id: 2}}]}
 
 module.exports = require('express').Router()
   // Adds an order with all the order items to the Order and OrderItem models
@@ -34,15 +35,22 @@ module.exports = require('express').Router()
     OrderItem.findAll({
       where: {
         order_id: req.params.orderId
-      }
+      },
+      include: [Product]
     })
     .then(orders => res.send(orders))
     .catch(next)
   })
-
-  // Get an individual order   /orders/status/id
-  .get('/status/:orderId', (req, res, next) =>
+  .put('/:orderId', function(req, res, next) {
     Order.findById(req.params.orderId)
-    .then(order => res.send(order.status))
-    .catch(next)
-    )
+      .then(order => order.update({ req.body.status })
+      .catch(next)
+  })
+      // ROUTE FOR SETTING STATUS TO CONFIRMED IS PENDING
+
+  // // Get an individual order   /orders/status/id
+  // .get('/status/:orderId', (req, res, next) =>
+  //   Order.findById(req.params.orderId)
+  //   .then(order => res.send(order.status))
+  //   .catch(next)
+  //   )

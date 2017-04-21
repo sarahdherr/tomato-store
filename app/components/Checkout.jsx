@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router'
+import axios from 'axios'
 
 export default class Checkout extends Component {
   constructor(props) {
@@ -11,9 +12,12 @@ export default class Checkout extends Component {
       state: '',
       zip: ''
     }
+    // HARDCODED ORDER ID HERE:
+    props.orderId = 1
 
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleConfirmOrder = this.handleConfirmOrder.bind(this)
   }
 
   handleChange = function(e) {
@@ -22,6 +26,13 @@ export default class Checkout extends Component {
       [e.target.name]: e.target.value
     })
     // set orderId to req.body.orderId
+  }
+  handleConfirmOrder = function(e) {
+    e.preventDefault()
+    // use props.orderId to change order's status to confirmed
+    console.log('IN CHECKOUT TRYING TO GET ORDERID OFF STATE', this.props)
+    axios.put(`api/orders/${this.props.orderId}`, {status: 'confirmed'})
+      .catch(err => console.error(err))
   }
 
   handleSubmit = function(e) {
@@ -95,23 +106,16 @@ export default class Checkout extends Component {
                       name="email" />
             </div>
           </div>
-          <button type="submit" form="guest-address" value="Submit"> Submit Address </button>
-        {/*  information */}
-        </fieldset>
+         {/* <button type="submit" form="guest-address" value="Submit"> Submit Address </button>
+         */}
         <legend>Payment Info</legend>
-        <input type="submit" value="Paypal" onClick={this.handlePaymentSubmit}/>
+        <input type="submit" value="Paypal" onClick={this.handleConfirmOrder}/>
         <br />
-        <hr />
+        <hr/>
+          <button type="submit" form="guest-address" value="Submit"><Link to=`/receipt/${this.props.orderId}`>Submit Order</Link></button>
+        </fieldset>
       </form>
-      <Link to='/receipt/1'>
-        <button>Submit Order</button>
-      </Link>
       </div>
     )
   }
 }
-
-       // redirect to Register Page 
-       //<button>Register</button> 
-
-       // <button>Login</button>*/

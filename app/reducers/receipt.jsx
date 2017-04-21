@@ -5,9 +5,21 @@ import Promise from 'bluebird'
 // have to verify what the returned order looks like with console log
 export const fetchOrder = (orderId) =>
   dispatch => {
-    axios.get(`/api/orders/${orderId}`)
-    .then(order => {
-      console.log('ORDER', order)
+    Promise.all([
+      axios.get(`/api/orders/status/${orderId}`),
+      axios.get(`/api/orders/${orderId}`),
+      axios.get(`/api/guests/${orderId}`)
+    ])
+    // status is a str; orderItems [{quantity: INT, product: dbProd, productId:, order_id:,  }, ... ]
+    // guest is the guest instance.
+    .spread((status, orderItems, guest) => {
+      // format the order as we desired
+      const order = {
+        status,
+        cart: orderItems,
+        guest
+      }
+      console.log('the foramtted data for the receipt: ', order)
       dispatch(gotOrder(order))
     })
     .catch(err => console.error(err))

@@ -41,7 +41,7 @@ const onCartEnter = (nextRouterState) => {
 }
 
 const onReceiptEnter = (nextRouterState) => {
-  console.log('in on receipt enter')
+  // console.log('in on receipt enter', nextRouterState) // works
   store.dispatch(fetchOrder(nextRouterState.params.orderId))
 }
 

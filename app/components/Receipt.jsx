@@ -1,15 +1,34 @@
 import React from 'react'
 
   /* global dispatch */
-const Receipt = (props) => {
-  function handleCheckout(e) {
-    props.checkoutReceipt(props.cart)
-  }
-  // TODOD:  + - Bttns to Quatntity td in table.
-  // console.log(props)
-  return (
+const Receipt = ({orderId, status, cart, guest}) =>
+
+  (
     <div>
-    <h1>`Order${this.props.orderId}`</h1>
+    <h1>`Order #${orderId} is {status}.`</h1>
+    <h2>Please confim your order items & order address below.</h2>
+      <table>
+        <tbody>
+          <tr >
+            <td>{guest.name}</td>
+          </tr>
+          <tr >
+            <td>{guest.email}</td>
+          </tr>
+          <tr >
+            <td>{guest.address}</td>
+          </tr>
+          <tr >
+            <td>{guest.city}</td>
+          </tr>
+          <tr >
+            <td>{guest.state}</td>
+          </tr>
+          <tr >
+            <td>{guest.zip}</td>
+          </tr>
+        </tbody>
+      </table>
       <table className="table table-striped table-hover ">
         <thead>
           <tr>
@@ -20,7 +39,7 @@ const Receipt = (props) => {
         </thead>
         <tbody>
         {
-          props.cart && props.cart.map(row =>
+          cart && cart.map(row =>
             (
               <tr key={row.product.id}>
                 <td>{row.product.name}</td>
@@ -32,8 +51,8 @@ const Receipt = (props) => {
         }
         </tbody>
       </table>
+
     </div>
   )
-}
 
 export default Receipt

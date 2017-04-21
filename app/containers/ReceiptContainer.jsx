@@ -6,8 +6,11 @@ import { checkoutReceipt } from '../reducers/receipt'
 
 const mapStateToProps = (state) => {
   return {
-    cart: state.cart.list,
-    orderId: this.props.params.orderId
+    // orderId: state.orderId, // state.orderId as per Elsa and Sarah ?
+    orderId: 1,
+    status: state.order.status,
+    cart: state.order.cart,
+    guest: state.order.guest,
   }
 }
 

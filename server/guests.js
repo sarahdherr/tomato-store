@@ -14,3 +14,12 @@ module.exports = require('express').Router()
   //     User.findById(req.params.id)
   //     .then(user => res.json(user))
   //     .catch(next))
+  .get('/:orderId', (req, res, next) => {
+    Guest.findOne({
+      where: { order_id: +req.params.orderId }
+    })
+    .then(guestInfo =>
+      res.send(guestInfo)
+    )
+    .catch(next)
+  })
