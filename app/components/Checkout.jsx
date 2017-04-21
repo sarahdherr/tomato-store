@@ -9,8 +9,7 @@ export default class Checkout extends Component {
       address: '',
       city: '',
       state: '',
-      zip: '',
-      order_id: this.props.orderId
+      zip: ''
     }
 
     this.handleChange = this.handleChange.bind(this)
@@ -27,7 +26,7 @@ export default class Checkout extends Component {
 
   handleSubmit = function(e) {
     e.preventDefault()
-    this.props.handleSubmitOrder(this.state)
+    this.props.handleSubmitOrder(this.state, this.props.orderId)
   }
 
   render() {
