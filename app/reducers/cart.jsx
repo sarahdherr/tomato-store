@@ -114,7 +114,10 @@ export const fetchCart = () =>
 export const checkoutCart = (cart) =>
   dispatch => {
     axios.post('api/orders', { cart })
-    .then((orderId) => dispatch(gotOrderId(orderId)))
+    .then((res) => {
+      console.log('response in dispatcher is', res.data[0])
+      dispatch(gotOrderId(res.data[0].order_id))
+    })
     .catch(err => console.error(err))
   }
 

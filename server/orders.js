@@ -13,22 +13,19 @@ module.exports = require('express').Router()
     // req.body.cart = [{quantity: int, product: {}}, ...]
     Order.create({})
     .then(order => {
-      const orderPromises = req.body.cart.map(cartRow => {
-        OrderItem.create({
+      return Promise.map(req.body.cart, cartRow => {
+        return OrderItem.create({
           order_id: order.id,
           quantity: cartRow.quantity,
           product_id: cartRow.product.id
         })
       })
-      return Promise.all(orderPromises)
-      .then(() => order.id)
-    })
-    .then(orderId => {
-      res.send(orderId)
+      .then(order => {
+        res.send(order)
+      })
     })
     .catch(next)
   })
-
   // Gets an order based on the order id and returns all the order item data
   .get('/:orderId', function(req, res, next) {
     OrderItem.findAll({
