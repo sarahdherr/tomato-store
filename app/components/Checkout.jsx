@@ -102,7 +102,9 @@ export default class Checkout extends Component {
         <input type="submit" value="Paypal" onClick={this.handlePaymentSubmit}/>
         <br />
         <hr />
-        <input type="submit" value="Submit" onClick={this.handleSubmit}/>
+        <Link to={`/receipt/${this.props.orderId}`}>
+          <input type="submit" value="Submit" onClick={this.handleSubmit}/>
+          </Link>
       </form>
       </div>
     )
