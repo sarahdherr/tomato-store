@@ -1,12 +1,11 @@
 import axios from 'axios'
 
 // Dispatchers
-export const postGuest = (guestAddress) =>
+export const postGuest = (guestEntry) =>
   dispatch => {
-    console.log('GUEST ADDRESS', guestAddress)
-    axios.post(`/api/guests`, guestAddress)
+    axios.post(`/api/guests`, guestEntry)
       .then(response => {
-        dispatch(postGuest(response.data))
+        dispatch(createGuest(response.data))
       })
       .catch(err => console.error(err))
   }

@@ -9,7 +9,8 @@ export default class Checkout extends Component {
       address: '',
       city: '',
       state: '',
-      zip: ''
+      zip: '',
+      order_id: this.props.orderId
     }
 
     this.handleChange = this.handleChange.bind(this)
@@ -30,6 +31,7 @@ export default class Checkout extends Component {
   }
 
   render() {
+    console.log('orderId in checkoutcomponent is', this.props.orderId)
     return (
       <div>
       <form className="form-horizontal" >
