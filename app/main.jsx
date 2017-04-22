@@ -21,6 +21,7 @@ import Login from './components/Login'
 import WhoAmI from './components/WhoAmI'
 import NotFound from './components/NotFound'
 import Navbar from './components/Navbar'
+// import FakePayPal from './components/FakePayPal'
 
 // onEnter takes three arguments in order to prevent route rendering until onEnter has finished. This prevents you from hitting an incomplete state during route render.
 const onProductsEnter = (nextRouterState, _, done) => {

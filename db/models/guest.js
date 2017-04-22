@@ -9,11 +9,11 @@ module.exports = db => db.define('guests', {
   state: STRING,
   zip: STRING,
   // email: {
-  //   type: STRING,
-  //   validate: {
-  //     isEmail: true,
-  //     notEmpty: true,
-  //   }
+    // type: STRING,
+    // validate: {
+      // isEmail: true,
+      // notEmpty: true,
+    // }
   // }
 })
 
