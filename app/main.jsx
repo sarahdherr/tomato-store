@@ -21,7 +21,6 @@ import Login from './components/Login'
 import WhoAmI from './components/WhoAmI'
 import NotFound from './components/NotFound'
 import Navbar from './components/Navbar'
-// import FakePayPal from './components/FakePayPal'
 
 // onEnter takes three arguments in order to prevent route rendering until onEnter has finished. This prevents you from hitting an incomplete state during route render.
 const onProductsEnter = (nextRouterState, _, done) => {
@@ -39,10 +38,6 @@ const onCartEnter = (nextRouterState) => {
   store.dispatch(fetchCart())
 }
 
-const onCheckoutEnter = (nextRouterState) => {
-  console.log('orderId in main.js', store.getState())
-}
-
 render(
   <Provider store={store}>
     <Router history={browserHistory}>
@@ -51,7 +46,7 @@ render(
         <Route path="/products" component={ProductsContainer} onEnter={onProductsEnter} />
         <Route path="/products/:id" component={ProductContainer} onEnter={onProductEnter} />
         <Route path="/cart" component={CartContainer} onEnter={onCartEnter} />
-        <Route path="/checkout" component={CheckoutContainer} onEnter={onCheckoutEnter} />
+        <Route path="/checkout" component={CheckoutContainer} />
       </Route>
       <Route path='*' component={NotFound} />
     </Router>

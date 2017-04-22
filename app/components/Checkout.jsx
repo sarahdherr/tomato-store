@@ -40,7 +40,6 @@ export default class Checkout extends Component {
     } else {
       alert('Shipping information accepted.')
       this.setState({ validAddress: true })
-      this.props.createGuest(this.state.guestEntry)
     }
   }
 
@@ -76,7 +75,6 @@ export default class Checkout extends Component {
   }
 
   render() {
-    console.log('orderId in checkoutcomponent is', this.props.orderId)
     return (
       <div>
       { !this.state.showPayment ? 
