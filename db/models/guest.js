@@ -7,7 +7,7 @@ module.exports = db => db.define('guests', {
   address: STRING,
   city: STRING,
   state: STRING,
-  zip: INTEGER,
+  zip: STRING,
   email: {
     type: STRING,
     validate: {
