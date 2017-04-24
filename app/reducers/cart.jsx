@@ -2,7 +2,9 @@ import axios from 'axios'
 import Promise from 'bluebird'
 
 const initialState = {
-  list: []
+  list: [],
+  orderId: 0,
+  size: 0
 }
 
 // Cart reducer
@@ -12,6 +14,14 @@ const reducer = (state=initialState, action) => {
   case GOT_CART:
     newState.list = action.cart
     break
+
+  case GOT_ORDER_ID:
+    newState.orderId = action.orderId
+    break
+
+  case GOT_CART_SIZE:
+    newState.size = action.size
+    break
   }
 
   return newState
@@ -19,12 +29,25 @@ const reducer = (state=initialState, action) => {
 
 // Cart constants
 const GOT_CART = 'GOT_CART'
+const GOT_ORDER_ID = 'GOT_ORDER_ID'
+const GOT_CART_SIZE = 'GOT_CART_SIZE'
 
 // Cart action creators
 // gotCart takes a cart [{quantity: int, product{}}, ...] and triggers the cart reducer with action type GOT_CART
 export const gotCart = cart => ({
   type: GOT_CART,
   cart
+})
+
+export const gotOrderId = orderId => ({
+  type: GOT_ORDER_ID,
+  orderId
+})
+
+// sets cart size on state
+export const gotCartSize = size => ({
+  type: GOT_CART_SIZE,
+  size
 })
 
 // export const changeBy = function(delta) {
@@ -67,7 +90,7 @@ export const getCartSize = () =>
     for (var productId in cart) {
       cartSize += cart[productId]
     }
-    return cartSize
+    dispatch(gotCartSize(cartSize))
   }
 
 export const fetchCart = () =>
@@ -87,15 +110,27 @@ export const fetchCart = () =>
       })
       .then(formattedCart => {
         dispatch(gotCart(formattedCart))
+        dispatch(getCartSize())
       })
       .catch(err => console.error(err))
   }
 
-export const checkoutCart = (cart) =>
+// WILL BE MOVED TO CONFIRMATION PAGE, WIPES OUT ORDER DATA
+// export const checkoutCart = (cart) =>
+//   dispatch => {
+//     axios.post('api/orders', { cart })
+//     .then(() => setCartLocal({})) // wipeout cart on localStorage
+//     .then(() => dispatch(gotCart({}))) // wipout cart on redux state
+//     .catch(err => console.error(err))
+//   }
+
+export const checkoutCart = (cart, userId) =>
   dispatch => {
-    axios.post('api/orders', { cart })
-    .then(() => setCartLocal({})) // wipeout cart on localStorage
-    .then(() => dispatch(gotCart({}))) // wipout cart on redux state
+    axios.post('api/orders', { cart, userId })
+    .then((res) => {
+      const orderId = res.data[0].order_id
+      dispatch(gotOrderId(orderId))
+    })
     .catch(err => console.error(err))
   }
 

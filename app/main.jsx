@@ -2,7 +2,7 @@
 import React from 'react'
 import {Router, Route, IndexRedirect, browserHistory} from 'react-router'
 import {render} from 'react-dom'
-import {connect, Provider} from 'react-redux'
+import {Provider} from 'react-redux'
 import axios from 'axios'
 
 import store from './store'
@@ -16,7 +16,11 @@ import ProductsContainer from './containers/ProductsContainer'
 import ProductContainer from './containers/ProductContainer'
 import CartContainer from './containers/CartContainer'
 import CheckoutContainer from './containers/CheckoutContainer'
+<<<<<<< HEAD
 import ReceiptContainer from './containers/ReceiptContainer'
+=======
+import SignUpContainer from './containers/SignUpContainer'
+>>>>>>> master
 
 import Jokes from './components/Jokes'
 import Login from './components/Login'
@@ -55,6 +59,7 @@ render(
         <Route path="/cart" component={CartContainer} onEnter={onCartEnter} />
         <Route path="/checkout" component={CheckoutContainer} />
         <Route path="/receipt/:orderId" component={ReceiptContainer} onEnter={onReceiptEnter} />
+        <Route path="/signup" component={SignUpContainer} />
       </Route>
       <Route path='*' component={NotFound} />
     </Router>
