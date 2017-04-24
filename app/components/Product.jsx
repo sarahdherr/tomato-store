@@ -11,7 +11,7 @@ const Product = (product = {}) => {
   function onClick(e) {
     console.log('route params', product.id)
     store.dispatch(changeItemQuantity(product.id))
-    window.location.reload()
+    // window.location.reload()
   }
 
   return (
