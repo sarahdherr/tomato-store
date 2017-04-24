@@ -19,7 +19,7 @@ const Product = (product = {}) => {
             <h1>{ product.name }</h1>
             <img src={ product.imageURL } />
             <p>${product.price}</p>
-            <p>Remaining stock is only... {product.quantity}</p>
+            <p>Remaining stock is only... {product.inventory}</p>
             {/* <p>NutritionFacts pending: {nutritionFacts}</p> */}
             <p><a className="btn btn-primary btn-lg" onClick= { onClick }>Add To Cart</a></p>
           </div>

@@ -37,22 +37,22 @@ module.exports = app
   // Session middleware - compared to express-session (which is what's used in the Auther workshop), cookie-session stores sessions in a cookie, rather than some other type of session store.
   // Cookie-session docs: https://www.npmjs.com/package/cookie-session
   // Removed vv when added the express-session. 
-  // .use(require('cookie-session')({
-  //   name: 'session',
-  //   keys: [process.env.SESSION_SECRET || 'an insecure secret key'],
-  // }))
+  .use(require('cookie-session')({
+    name: 'session',
+    keys: [process.env.SESSION_SECRET || 'an insecure secret key'],
+  }))
 
-  .use(session({
-    secret: 'tomtom',
-    cookie: {},
-    resave: false,
-    saveUninitialized: true,
+  // .use(session({
+  //   secret: 'tomtom',
+  //   cookie: {},
+  //   resave: false,
+  //   saveUninitialized: true,
     // store: {
     //   cart: {cartInfo: "this is a cart"}
     // }
     
     // cookie: { secure: true } -> for when we have an https:// website (recommended by npm docs)
-  }))
+  // }))
 
   // Body parsing middleware
   .use(bodyParser.urlencoded({ extended: true }))

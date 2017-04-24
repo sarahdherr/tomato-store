@@ -11,7 +11,7 @@ const Navbar = (props) => {
         <Link to="/" className="navbar-brand">Home</Link>
 
       <ul className="nav navbar-nav">
-        <li><Link to="/signup" activeClassName="active-link">Sign Up</Link></li>
+        <li><Link to="/login" activeClassName="active-link">Login</Link></li>
         <li><Link to="/products" activeClassName="active-link">Products</Link></li>
         <li><Link to="/cart" activeClassName="active-link"><span className="glyphicon glyphicon-shopping-cart"></span>{props.cartSize}</Link></li>
       </ul>

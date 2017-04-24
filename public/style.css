@@ -10,3 +10,11 @@
 .product-item p {
 	text-align: center;
 }
+
+.vertical-line {
+	border-right: 1px black solid;
+	width: 1px;
+	height: 100vh;
+	display: inline-block;
+	float: left;
+}

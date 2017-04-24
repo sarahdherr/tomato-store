@@ -1,7 +1,13 @@
 import axios from 'axios'
 
+const inititalState = {
+  userInfo: {
+    id: null
+  }
+}
+
 // User reducer
-const reducer = (state={}, action) => {
+const reducer = (state=inititalState, action) => {
   const newState = Object.assign({}, state)
 
   switch (action.type) {

@@ -22,6 +22,7 @@ import Login from './components/Login'
 import WhoAmI from './components/WhoAmI'
 import NotFound from './components/NotFound'
 import Navbar from './components/Navbar'
+import LoginSignup from './components/LoginSignup'
 
 // onEnter takes three arguments in order to prevent route rendering until onEnter has finished. This prevents you from hitting an incomplete state during route render.
 const onProductsEnter = (nextRouterState, _, done) => {
@@ -48,7 +49,7 @@ render(
         <Route path="/products/:id" component={ProductContainer} onEnter={onProductEnter} />
         <Route path="/cart" component={CartContainer} onEnter={onCartEnter} />
         <Route path="/checkout" component={CheckoutContainer} />
-        <Route path="/signup" component={SignUpContainer} />
+        <Route path="/login" component={LoginSignup} />
       </Route>
       <Route path='*' component={NotFound} />
     </Router>

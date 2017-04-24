@@ -43,7 +43,7 @@ export default class extends React.Component {
 
         <div>
           <label>Password:</label>
-          <input name='password' onChange={this.handleChange} />
+          <input name='password' type='password' onChange={this.handleChange} />
         </div>
 
         <button type='submit' value='Sign Up'>SIGN UP</button>
