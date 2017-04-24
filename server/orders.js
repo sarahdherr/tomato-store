@@ -13,6 +13,10 @@ module.exports = require('express').Router()
     // req.body.cart = [{quantity: int, product: {}}, ...]
     Order.create({})
     .then(order => {
+      return order.setUser(req.body.userId)
+    })
+    .then(order => {
+      // order.setUser(+req.body.userId)
       return Promise.map(req.body.cart, cartRow => {
         return OrderItem.create({
           order_id: order.id,

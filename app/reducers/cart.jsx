@@ -124,9 +124,9 @@ export const fetchCart = () =>
 //     .catch(err => console.error(err))
 //   }
 
-export const checkoutCart = (cart) =>
+export const checkoutCart = (cart, userId) =>
   dispatch => {
-    axios.post('api/orders', { cart })
+    axios.post('api/orders', { cart, userId })
     .then((res) => {
       const orderId = res.data[0].order_id
       dispatch(gotOrderId(orderId))
