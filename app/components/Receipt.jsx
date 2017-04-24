@@ -6,10 +6,10 @@ const Receipt = ({orderId, status, cart, guest}) =>
   (
     <div>
     <h1>Order # { orderId } is { status }</h1>
-    <h3>The following items will be shipped to the following address: </h3>
-      <table>
+    <h3>The below items will be shipped to the following address: </h3>
+      <table className="container">
         <tbody>
-          <tr >
+          <tr>
             <td>{guest.name}</td>
           </tr>
           <tr >
