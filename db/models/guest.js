@@ -8,13 +8,13 @@ module.exports = db => db.define('guests', {
   city: STRING,
   state: STRING,
   zip: STRING,
-  email: {
-    type: STRING,
-    validate: {
-      isEmail: true,
-      notEmpty: true,
-    }
-  }
+  // email: {
+  //   type: STRING,
+  //   validate: {
+  //     isEmail: true,
+  //     notEmpty: true,
+  //   }
+  // }
 })
 
 module.exports.associations = (Guest, {Order}) => {

@@ -4,7 +4,7 @@ import store from 'APP/app/store'
 import { getCartSize } from 'APP/app/reducers/cart'
 
 const Navbar = (props) => {
-  const cartSize = store.dispatch(getCartSize())
+  // const cartSize = store.dispatch(getCartSize())
 
   return (
     <nav className="navbar navbar-default">
@@ -14,7 +14,7 @@ const Navbar = (props) => {
       <ul className="nav navbar-nav">
         <li><Link to="#" activeClassName="active-link">Users</Link></li>
         <li><Link to="/products" activeClassName="active-link">Products</Link></li>
-        <li><Link to="/cart" activeClassName="active-link"><span className="glyphicon glyphicon-shopping-cart"></span>{`(${cartSize})`}</Link></li>
+        <li><Link to="/cart" activeClassName="active-link"><span className="glyphicon glyphicon-shopping-cart"></span>{props.cartSize}</Link></li>
       </ul>
 
       <form className="navbar-form navbar-right" role="search">
