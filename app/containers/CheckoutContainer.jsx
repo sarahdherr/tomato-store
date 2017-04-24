@@ -1,9 +1,9 @@
 import { connect } from 'react-redux'
 import Checkout from 'APP/app/components/Checkout'
 import store from 'APP/app/store'
-import { postGuest } from 'APP/app/reducers/guest'
+import { postGuest, createGuest } from 'APP/app/reducers/guest'
 
-const handleSubmitOrder = (guestEntry) => store.dispatch(postGuest(guestEntry))
+const handleSubmitOrder = (guestEntry, orderId) => store.dispatch(postGuest(guestEntry, orderId))
 
 const mapStateToProps = (state) =>
     ({
@@ -11,6 +11,12 @@ const mapStateToProps = (state) =>
       handleSubmitOrder
     })
 
-const mapDispatchToProps = null
+const mapDispatchToProps = (dispatch) => {
+  return {
+    createGuest(guestInfo) {
+      dispatch(createGuest(guestInfo))
+    }
+  }
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(Checkout)
