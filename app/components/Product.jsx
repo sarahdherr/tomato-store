@@ -9,9 +9,7 @@ const Product = (product = {}) => {
   // WE THINK THAT WOULD JUST BE A CSS CLASS FOR GREYSCALE.
   // ALSO PENDING: MAKING A LINK TO THE CART VIEW
   function onClick(e) {
-    console.log('route params', product.id)
     store.dispatch(changeItemQuantity(product.id))
-    // window.location.reload()
   }
 
   return (

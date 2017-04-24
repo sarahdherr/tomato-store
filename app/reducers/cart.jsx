@@ -22,6 +22,10 @@ const reducer = (state=initialState, action) => {
   case GOT_CART_SIZE:
     newState.size = action.size
     break
+
+  case CLEARED_CART:
+    newState.size = action.size
+    break
   }
 
   return newState
@@ -31,6 +35,7 @@ const reducer = (state=initialState, action) => {
 const GOT_CART = 'GOT_CART'
 const GOT_ORDER_ID = 'GOT_ORDER_ID'
 const GOT_CART_SIZE = 'GOT_CART_SIZE'
+const CLEARED_CART = 'CLEARED_CART'
 
 // Cart action creators
 // gotCart takes a cart [{quantity: int, product{}}, ...] and triggers the cart reducer with action type GOT_CART
@@ -48,6 +53,11 @@ export const gotOrderId = orderId => ({
 export const gotCartSize = size => ({
   type: GOT_CART_SIZE,
   size
+})
+// clears ocalStorage cart (to "")
+export const clearedCart = () => ({
+  type: CLEARED_CART,
+  size: 0
 })
 
 // export const changeBy = function(delta) {
@@ -132,6 +142,12 @@ export const checkoutCart = (cart, userId) =>
       dispatch(gotOrderId(orderId))
     })
     .catch(err => console.error(err))
+  }
+
+export const clearCart = () =>
+  dispatch => {
+    window.localStorage.cart = ''
+    dispatch(clearedCart())
   }
 
 export default reducer

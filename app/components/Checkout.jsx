@@ -76,7 +76,6 @@ export default class Checkout extends Component {
   }
 
   handleSubmit = function(e) {
-    console.log('IN HANDLE SUBMIT', this.state)
     e.preventDefault()
     if (this.state.validAddress && this.state.validPayment) {
       this.props.handleSubmitOrder(this.state.guestEntry, this.props.orderId)

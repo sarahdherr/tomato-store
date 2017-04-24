@@ -2,7 +2,6 @@ import axios from 'axios'
 import Promise from 'bluebird'
 
 // DISPATCHERS
-// have to verify what the returned order looks like with console log
 // FOR VALIDATION WE ARE LOOKING ONLY IN STATE.ORDER, A FRESH DB PULL
 export const fetchOrder = (orderId) =>
   dispatch =>
@@ -15,11 +14,10 @@ export const fetchOrder = (orderId) =>
     // guest is the guest instance.
     .spread((status, orderItems, guest) => {
       // format the order as we desired
-      console.log('in receipt reducer, status', status)
       const order = {
-        status,
-        cart: orderItems,
-        guest
+        status: status.data,
+        cart: orderItems.data,
+        guest: guest.data
       }
       dispatch(gotOrder(order))
     })
@@ -39,10 +37,10 @@ const initialState = {
   order: {}
 }
 const reducer = (state=initialState, action) => {
-  const newState = Object.assign({}, state)
+  let newState = Object.assign({}, state)
   switch (action.type) {
   case GOT_ORDER:
-    newState.order = action.order
+    newState = action.order
     break
   }
 
