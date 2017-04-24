@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router'
+import axios from 'axios'
 
 export default class Checkout extends Component {
   constructor(props) {
@@ -20,6 +21,7 @@ export default class Checkout extends Component {
 
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handlePaypalButton = this.handlePaypalButton.bind(this)
     this.handleAddress = this.handleAddress.bind(this)
     this.handlePaymentSubmit = this.handlePaymentSubmit.bind(this)
     this.handlePaypalLogin = this.handlePaypalLogin.bind(this)
@@ -27,14 +29,14 @@ export default class Checkout extends Component {
 
   handleAddress = function(e) {
     e.preventDefault()
-    
-    let emptyFieldsArr = [];
+
+    let emptyFieldsArr = []
     Object.keys(this.state.guestEntry).map(key => {
       if (this.state.guestEntry[key] === '') {
-        emptyFieldsArr.push(key);
+        emptyFieldsArr.push(key)
       }
     })
-    
+
     if (emptyFieldsArr.length) {
       alert('Please fill in empty feilds: ' + emptyFieldsArr.join(', '))
     } else {
@@ -65,6 +67,14 @@ export default class Checkout extends Component {
     this.setState({ showPayment: false, validPayment: true })
   }
 
+  handlePaypalButton = function(e) {
+    e.preventDefault()
+    // use props.orderId to change order's status to confirmed
+    axios.put(`api/orders/${this.props.orderId}`, {status: 'confirmed'})
+    .then(() => this.setState({ showPayment: true, validPayment: true }))
+    .catch(err => console.error(err))
+  }
+
   handleSubmit = function(e) {
     e.preventDefault()
     if (this.state.validAddress && this.state.validPayment) {
@@ -77,8 +87,9 @@ export default class Checkout extends Component {
   render() {
     return (
       <div>
-      { !this.state.showPayment ? 
-      (<form className="form-horizontal" >
+
+      { !this.state.showPayment ?
+            (<form id="guest-address" className="form-horizontal">
         <fieldset>
           <legend>Shipping Info</legend>
           <div className="form-group">
@@ -203,14 +214,13 @@ export default class Checkout extends Component {
                       value={this.state.guestEntry.email} />
             </div>
           </div>
-          <input type="submit" value="Submit Address" onClick={this.handleAddress} />
-        {/*  information */}
-        </fieldset>
+          <button className="btn" onClick={this.handleAddress}>Submit Address</button>
         <legend>Payment Info</legend>
-        <input type="submit" value="Paypal" onClick={this.handlePaymentSubmit}/>
+        <button className="btn" onClick={this.handlePaypalButton}>Paypal</button>
         <br />
-        <hr />
-        <input type="submit" value="Submit" onClick={this.handleSubmit}/>
+        <hr/>
+          <button className="btn-danger" type="submit" form="guest-address" onClick={this.handleSubmit}><Link to={`/receipt/${this.props.orderId}`}>Submit Order</Link></button>
+        </fieldset>
       </form>) : (
       <div>
         <h1>Welcome to PayPal</h1>
@@ -229,8 +239,3 @@ export default class Checkout extends Component {
     )
   }
 }
-
-       // redirect to Register Page 
-       //<button>Register</button> 
-
-       // <button>Login</button>*/ 

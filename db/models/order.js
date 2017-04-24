@@ -1,8 +1,13 @@
 'use strict'
 
-const {STRING} = require('sequelize')
+const Sequelize = require('sequelize')
 
-module.exports = db => db.define('order', {}, {})
+module.exports = db => db.define('order', {
+  status: {
+    type: Sequelize.STRING,
+    defaultValue: 'pending'
+  }
+}, {})
 
 module.exports.associations = (Order, {OrderItem, Product, User, Guest}) => {
   Order.belongsToMany(Product, {through: OrderItem})

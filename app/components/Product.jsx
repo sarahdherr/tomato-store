@@ -9,9 +9,7 @@ const Product = (product = {}) => {
   // WE THINK THAT WOULD JUST BE A CSS CLASS FOR GREYSCALE.
   // ALSO PENDING: MAKING A LINK TO THE CART VIEW
   function onClick(e) {
-    console.log('route params', product.id)
     store.dispatch(changeItemQuantity(product.id))
-    // window.location.reload()
   }
 
   return (
@@ -19,7 +17,7 @@ const Product = (product = {}) => {
             <h1>{ product.name }</h1>
             <img src={ product.imageURL } />
             <p>${product.price}</p>
-            <p>Remaining stock is only... {product.quantity}</p>
+            <p>Remaining stock is only... {product.inventory}</p>
             {/* <p>NutritionFacts pending: {nutritionFacts}</p> */}
             <p><a className="btn btn-primary btn-lg" onClick= { onClick }>Add To Cart</a></p>
           </div>
