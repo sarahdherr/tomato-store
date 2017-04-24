@@ -46,6 +46,7 @@ module.exports = require('express').Router()
   .put('/:orderId', function(req, res, next) {
     Order.findById(req.params.orderId)
       .then(order => order.update({ status: req.body.status }))
+      .then(order => res.send(order))
       .catch(next)
   })
 

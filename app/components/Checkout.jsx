@@ -21,7 +21,7 @@ export default class Checkout extends Component {
 
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
-    this.handleConfirmOrder = this.handleConfirmOrder.bind(this)
+    this.handlePaypalButton = this.handlePaypalButton.bind(this)
     this.handleAddress = this.handleAddress.bind(this)
     this.handlePaymentSubmit = this.handlePaymentSubmit.bind(this)
     this.handlePaypalLogin = this.handlePaypalLogin.bind(this)
@@ -66,15 +66,17 @@ export default class Checkout extends Component {
     e.preventDefault()
     this.setState({ showPayment: false, validPayment: true })
   }
-  handleConfirmOrder = function(e) {
+
+  handlePaypalButton = function(e) {
     e.preventDefault()
     // use props.orderId to change order's status to confirmed
-    console.log('IN CHECKOUT TRYING TO GET ORDERID OFF STATE', this.props)
     axios.put(`api/orders/${this.props.orderId}`, {status: 'confirmed'})
-      .catch(err => console.error(err))
+    .then(() => this.setState({ showPayment: true, validPayment: true }))
+    .catch(err => console.error(err))
   }
 
   handleSubmit = function(e) {
+    console.log('IN HANDLE SUBMIT', this.state)
     e.preventDefault()
     if (this.state.validAddress && this.state.validPayment) {
       this.props.handleSubmitOrder(this.state.guestEntry, this.props.orderId)
@@ -88,7 +90,7 @@ export default class Checkout extends Component {
       <div>
 
       { !this.state.showPayment ?
-      (<form id="guest-address" className="form-horizontal" onSubmit={this.handleSubmit}>
+            (<form id="guest-address" className="form-horizontal">
         <fieldset>
           <legend>Shipping Info</legend>
           <div className="form-group">
@@ -213,12 +215,12 @@ export default class Checkout extends Component {
                       value={this.state.guestEntry.email} />
             </div>
           </div>
-          <input type="submit" value="Submit Address" onClick={this.handleAddress} />
+          <button className="btn" onClick={this.handleAddress}>Submit Address</button>
         <legend>Payment Info</legend>
-        <input type="submit" value="Paypal" onClick={this.handleConfirmOrder}/>
+        <button className="btn" onClick={this.handlePaypalButton}>Paypal</button>
         <br />
         <hr/>
-          <button type="submit" form="guest-address" value="Submit"><Link to={`/receipt/${this.props.orderId}`}>Submit Order</Link></button>
+          <button className="btn-danger" type="submit" form="guest-address" onClick={this.handleSubmit}><Link to={`/receipt/${this.props.orderId}`}>Submit Order</Link></button>
         </fieldset>
       </form>) : (
       <div>
