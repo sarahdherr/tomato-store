@@ -45,14 +45,15 @@ module.exports = require('express').Router()
   })
   .put('/:orderId', function(req, res, next) {
     Order.findById(req.params.orderId)
-      .then(order => order.update({ req.body.status })
+      .then(order => order.update({ status: req.body.status }))
       .catch(next)
   })
-      // ROUTE FOR SETTING STATUS TO CONFIRMED IS PENDING
 
-  // // Get an individual order   /orders/status/id
-  // .get('/status/:orderId', (req, res, next) =>
-  //   Order.findById(req.params.orderId)
-  //   .then(order => res.send(order.status))
-  //   .catch(next)
-  //   )
+  // ROUTE FOR SETTING STATUS TO CONFIRMED IS PENDING
+
+  // Get an individual order   /orders/status/id
+  .get('/status/:orderId', (req, res, next) =>
+    Order.findById(req.params.orderId)
+    .then(order => res.send(order.status.data))
+    .catch(next)
+    )

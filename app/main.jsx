@@ -16,11 +16,8 @@ import ProductsContainer from './containers/ProductsContainer'
 import ProductContainer from './containers/ProductContainer'
 import CartContainer from './containers/CartContainer'
 import CheckoutContainer from './containers/CheckoutContainer'
-<<<<<<< HEAD
 import ReceiptContainer from './containers/ReceiptContainer'
-=======
 import SignUpContainer from './containers/SignUpContainer'
->>>>>>> master
 
 import Jokes from './components/Jokes'
 import Login from './components/Login'

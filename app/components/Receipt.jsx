@@ -5,8 +5,8 @@ const Receipt = ({orderId, status, cart, guest}) =>
 
   (
     <div>
-    <h1>`Order #${orderId} is {status}.`</h1>
-    <h2>Please confim your order items & order address below.</h2>
+    <h1>Order # { orderId } is { status }.</h1>
+    <h3>The following items will be shipped to the following address: </h3>
       <table>
         <tbody>
           <tr >

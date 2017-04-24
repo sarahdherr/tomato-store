@@ -18,8 +18,6 @@ export default class Checkout extends Component {
       showPayment: false,
       validPayment: false
     }
-    // HARDCODED ORDER ID HERE:
-    props.orderId = 1
 
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
