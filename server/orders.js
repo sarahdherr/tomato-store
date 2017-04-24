@@ -54,7 +54,11 @@ module.exports = require('express').Router()
 
   // Get an individual order   /orders/status/id
   .get('/status/:orderId', (req, res, next) =>
+
     Order.findById(req.params.orderId)
-    .then(order => res.send(order.status.data))
+    .then(order => {
+      res.send(order.data.status)
+      console.log('in orders.js route', order)
+    })
     .catch(next)
     )

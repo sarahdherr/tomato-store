@@ -5,6 +5,7 @@ import { checkoutReceipt } from '../reducers/receipt'
 // note that dispatch to props has nothing to do with receipt but is copy / pasted
 
 const mapStateToProps = (state) => {
+  console.log('State in Receipt container ', state)
   return {
     orderId: state.cart.orderId,
     status: state.order.status,

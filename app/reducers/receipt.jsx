@@ -14,6 +14,7 @@ export const fetchOrder = (orderId) =>
     // guest is the guest instance.
     .spread((status, orderItems, guest) => {
       // format the order as we desired
+      console.log('in receipt reducer', status)
       const order = {
         status,
         cart: orderItems,
