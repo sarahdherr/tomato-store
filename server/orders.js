@@ -57,8 +57,7 @@ module.exports = require('express').Router()
 
     Order.findById(req.params.orderId)
     .then(order => {
-      res.send(order.data.status)
-      console.log('in orders.js route', order)
+      res.send(order.status)
     })
     .catch(next)
     )

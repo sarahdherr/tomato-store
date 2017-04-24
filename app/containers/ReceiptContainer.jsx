@@ -6,11 +6,14 @@ import { checkoutReceipt } from '../reducers/receipt'
 
 const mapStateToProps = (state) => {
   console.log('State in Receipt container ', state)
+  // later let's figure out why it's order inside order
+  // FOR VALIDATION WE ARE LOOKING ONLY IN STATE.ORDER, A FRESH DB PULL
+  // FOR REFACTORING: A SMALL CHALLENGE
   return {
-    orderId: state.cart.orderId,
-    status: state.order.status,
-    cart: state.order.cart,
-    guest: state.guest,
+    orderId: state.order.order.cart.data[0].order_id,
+    status: state.order.order.status.data,
+    cart: state.order.order.cart.data,
+    guest: state.order.order.guest.data,
   }
 }
 

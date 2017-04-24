@@ -3,8 +3,9 @@ import Promise from 'bluebird'
 
 // DISPATCHERS
 // have to verify what the returned order looks like with console log
+// FOR VALIDATION WE ARE LOOKING ONLY IN STATE.ORDER, A FRESH DB PULL
 export const fetchOrder = (orderId) =>
-  dispatch => {
+  dispatch =>
     Promise.all([
       axios.get(`/api/orders/status/${orderId}`),
       axios.get(`/api/orders/${orderId}`),
@@ -14,17 +15,15 @@ export const fetchOrder = (orderId) =>
     // guest is the guest instance.
     .spread((status, orderItems, guest) => {
       // format the order as we desired
-      console.log('in receipt reducer', status)
+      console.log('in receipt reducer, status', status)
       const order = {
         status,
         cart: orderItems,
         guest
       }
-      console.log('the foramtted data for the receipt: ', order)
       dispatch(gotOrder(order))
     })
     .catch(err => console.error(err))
-  }
 
 // ORDER CONSTANTS
 const GOT_ORDER = 'GOT_ORDER'
