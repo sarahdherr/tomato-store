@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import Cart from '../components/Cart'
-import { checkoutCart } from '../reducers/cart'
+import { checkoutCart, itemIncrement, itemDecrement, removeItem } from '../reducers/cart'
 
 const mapStateToProps = (state) => {
   return {
@@ -14,6 +14,18 @@ const mapDispatchToProps = (dispatch) => {
   return {
     checkoutCart(cart, id) {
       dispatch(checkoutCart(cart, id))
+    },
+
+    itemIncrement(productId) {
+      dispatch(itemIncrement(productId))
+    },
+
+    itemDecrement(productId) {
+      dispatch(itemDecrement(productId))
+    },
+
+    removeItem(productId) {
+      dispatch(removeItem(productId))
     }
   }
 }

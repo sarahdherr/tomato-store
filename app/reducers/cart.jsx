@@ -82,11 +82,29 @@ export const clearedCart = () => ({
 //     dispatch(fetchCart())
 //   }
 
-export const changeItemQuantity = (productId) =>
+export const itemIncrement = (productId) =>
   dispatch => {
     const cart = getCartLocal()
+    console.log('cart in reducer', cart)
     !cart[productId] ? cart[productId] = 1 : cart[productId]++
+    // if (cart[productId] < 1) delete cart[productId]
+    setCartLocal(cart)
+    dispatch(fetchCart())
+  }
+
+export const itemDecrement = (productId) =>
+  dispatch => {
+    const cart = getCartLocal()
+    !cart[productId] ? cart[productId] = 0 : cart[productId]--
     if (cart[productId] < 1) delete cart[productId]
+    setCartLocal(cart)
+    dispatch(fetchCart())
+  }
+
+export const removeItem = (productId) =>
+  dispatch => {
+    const cart = getCartLocal()
+    delete cart[productId]
     setCartLocal(cart)
     dispatch(fetchCart())
   }
