@@ -9,25 +9,6 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  // return a destructured object where checkoutCart is set to a function that dispatches the checkoutCart reducer imported above.
-  return {
-    checkoutCart(cart, id) {
-      dispatch(checkoutCart(cart, id))
-    },
-
-    itemIncrement(productId) {
-      dispatch(itemIncrement(productId))
-    },
-
-    itemDecrement(productId) {
-      dispatch(itemDecrement(productId))
-    },
-
-    removeItem(productId) {
-      dispatch(removeItem(productId))
-    }
-  }
-}
+const mapDispatchToProps = { checkoutCart, itemIncrement, itemDecrement, removeItem }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cart)
