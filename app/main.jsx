@@ -20,7 +20,6 @@ import ReceiptContainer from './containers/ReceiptContainer'
 import SignUpContainer from './containers/SignUpContainer'
 
 import Jokes from './components/Jokes'
-import Login from './components/Login'
 import WhoAmI from './components/WhoAmI'
 import NotFound from './components/NotFound'
 import Navbar from './components/Navbar'

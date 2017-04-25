@@ -1,6 +1,7 @@
 import React from 'react'
 import Login from './Login'
 import Signup from '../containers/SignupContainer'
+import store from 'APP/app/store'
 
 export default (props) => {
   return (

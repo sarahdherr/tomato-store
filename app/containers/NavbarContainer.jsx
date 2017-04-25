@@ -4,10 +4,11 @@ import Navbar from '../components/Navbar'
 
 const mapStateToProps = (state) => {
 	return {
-		cartSize: state.cart.size
+		cartSize: state.cart.size,
+		user: state.auth
 	}
 }
 
 const mapDispatchToProps = null;
 
-export default connect(mapStateToProps, mapDispatchToProps)(Navbar)
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar) 
