@@ -94,6 +94,12 @@ passport.deserializeUser(
   }
 )
 
+passport.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+})
+
 // require.('passport-local').Strategy => a function we can use as a constructor, that takes in a callback
 passport.use(new (require('passport-local').Strategy)(
   (email, password, done) => {
@@ -120,12 +126,6 @@ passport.use(new (require('passport-local').Strategy)(
       .catch(done)
   }
 ))
-
-auth.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-})
 
 auth.get('/whoami', (req, res) => res.send(req.user))
 
