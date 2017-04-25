@@ -121,6 +121,12 @@ passport.use(new (require('passport-local').Strategy)(
   }
 ))
 
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+})
+
 auth.get('/whoami', (req, res) => res.send(req.user))
 
 // POST requests for local login:
