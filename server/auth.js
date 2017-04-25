@@ -94,6 +94,7 @@ passport.deserializeUser(
   }
 )
 
+// vv This is what I added to include "Access-Control-Allow-Origin" header
 auth.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");

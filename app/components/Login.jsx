@@ -21,6 +21,12 @@ function handleGithub(evt) {
     .catch(err => console.error(err))
 }
 
+function handleLogout(evt) {
+  axios.get('/api/auth/logout')
+    .then(response => console.log(response.data))
+    .catch(err => console.error(err))
+}
+
 export const Login = ({ login }) => (
   <div>
     <h3>Log in</h3>
@@ -43,6 +49,10 @@ export const Login = ({ login }) => (
       <button type="submit" onClick={handleFacebook}>Facebook</button>
       <button type="submit" onClick={handleGoogle}>Google</button>
       <button type="submit" onClick={handleGithub}>Github</button>
+
+      <div className="clearfix">
+        <Link to='/products'><button type="submit" onClick={handleLogout}>Logout</button></Link>
+      </div>
   </div>
 )
 
