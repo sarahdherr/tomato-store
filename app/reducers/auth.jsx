@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { browserHistory } from 'react-router'
 
 const reducer = (state=null, action) => {
   switch (action.type) {
@@ -18,12 +19,16 @@ export const login = (username, password) =>
     axios.post('/api/auth/login/local',
       {username, password})
       .then(() => dispatch(whoami()))
+      // Once logged in, redirects to the cart view
+      .then(() => browserHistory.push('/cart'))
       .catch(() => dispatch(whoami()))
 
 export const logout = () =>
   dispatch =>
     axios.post('/api/auth/logout')
       .then(() => dispatch(whoami()))
+      // Once logged out, redirects to the home page view of all products
+      .then(() => browserHistory.push('/products'))
       .catch(() => dispatch(whoami()))
 
 export const whoami = () =>

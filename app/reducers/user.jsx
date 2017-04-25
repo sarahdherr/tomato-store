@@ -5,7 +5,7 @@ const intitialState = {
     id: null
   }
 }
-// User reducer
+
 const reducer = (state=intitialState, action) => {
   const newState = Object.assign({}, state)
 
