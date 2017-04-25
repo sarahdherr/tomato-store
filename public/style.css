@@ -10,3 +10,15 @@
 .product-item p {
 	text-align: center;
 }
+
+.navbar {
+	overflow: hidden;
+    position: fixed; /* Set the navbar to fixed position */
+    top: 0; /* Position the navbar at the top of the page */
+    width: 100%; /* Full width */
+    z-index:1; /*Add this*/
+}
+
+.underNav {
+    margin-top: 45px; /* Add a top margin to avoid content overlay */
+}
