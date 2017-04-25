@@ -1,19 +1,18 @@
 import axios from 'axios'
 
-const inititalState = {
+const intitialState = {
   userInfo: {
     id: null
   }
 }
 
-// User reducer
-const reducer = (state=inititalState, action) => {
+const reducer = (state=intitialState, action) => {
   const newState = Object.assign({}, state)
 
   switch (action.type) {
-    case GET_USER:
-      newState.userInfo = action.user
-      break
+  case GET_USER:
+    newState.userInfo = action.user
+    break
   }
 
   return newState
@@ -29,8 +28,8 @@ export const getUser = user => ({
 })
 
 // Dispatchers
-export const setUser = user => 
-  dispatch => 
+export const setUser = user =>
+  dispatch =>
     axios.post('/api/users', user)
       .then(response => {
         dispatch(getUser(response.data))

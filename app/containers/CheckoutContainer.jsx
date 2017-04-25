@@ -2,8 +2,12 @@ import { connect } from 'react-redux'
 import Checkout from 'APP/app/components/Checkout'
 import store from 'APP/app/store'
 import { postGuest, createGuest } from 'APP/app/reducers/guest'
+import { clearCart } from 'APP/app/reducers/cart'
 
-const handleSubmitOrder = (guestEntry, orderId) => store.dispatch(postGuest(guestEntry, orderId))
+const handleSubmitOrder = (guestEntry, orderId) => {
+  store.dispatch(postGuest(guestEntry, orderId))
+  store.dispatch(clearCart())
+}
 
 const mapStateToProps = (state) =>
     ({

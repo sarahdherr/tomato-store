@@ -4,9 +4,9 @@ import axios from 'axios'
 export const postGuest = (guestEntry, orderId) =>
   dispatch => {
     axios.post(`/api/guests`, { orderId, guestEntry })
-      // .then(response => {
-      //   dispatch(createGuest(response.data))
-      // })
+      .then(response => {
+        dispatch(createGuest(response.data))
+      })
       .catch(err => console.error(err))
   }
 

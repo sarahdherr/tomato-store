@@ -9,12 +9,14 @@ import store from './store'
 import { fetchProducts } from './reducers/products'
 import { fetchProduct } from './reducers/product'
 import { fetchCart } from './reducers/cart'
+import { fetchOrder } from './reducers/receipt'
 
 import AppContainer from './containers/AppContainer'
 import ProductsContainer from './containers/ProductsContainer'
 import ProductContainer from './containers/ProductContainer'
 import CartContainer from './containers/CartContainer'
 import CheckoutContainer from './containers/CheckoutContainer'
+import ReceiptContainer from './containers/ReceiptContainer'
 import SignUpContainer from './containers/SignUpContainer'
 
 import Jokes from './components/Jokes'
@@ -40,6 +42,12 @@ const onCartEnter = (nextRouterState) => {
   store.dispatch(fetchCart())
 }
 
+const onReceiptEnter = (nextRouterState, _, done) => {
+  // console.log('in on receipt enter', nextRouterState) // works
+  store.dispatch(fetchOrder(nextRouterState.params.orderId))
+  .then(done)
+}
+
 render(
   <Provider store={store}>
     <Router history={browserHistory}>
@@ -50,6 +58,7 @@ render(
         <Route path="/cart" component={CartContainer} onEnter={onCartEnter} />
         <Route path="/checkout" component={CheckoutContainer} />
         <Route path="/login" component={LoginSignup} />
+        <Route path="/receipt/:orderId" component={ReceiptContainer} onEnter={onReceiptEnter} />
       </Route>
       <Route path='*' component={NotFound} />
     </Router>
