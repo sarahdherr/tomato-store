@@ -1,6 +1,7 @@
 import React from 'react'
 import {login} from 'APP/app/reducers/auth'
 import {connect} from 'react-redux'
+import {Link} from 'react-router'
 import axios from 'axios'
 
 function handleGoogle(evt) {
