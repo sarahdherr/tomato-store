@@ -24,7 +24,7 @@ export default class extends React.Component {
   handleSubmit = (evt) => {
     evt.preventDefault()
     console.log(this.state)
-    this.props.setUser(this.state)
+    this.props.signup(this.state)
 
   }
 
@@ -48,7 +48,7 @@ export default class extends React.Component {
           <input name='password' type='password' onChange={this.handleChange} />
         </div>
 
-        <button type='submit' value='Sign Up'><Link to='/products'>SIGN UP</Link></button>
+        <button type='submit' value='Sign Up'>SIGN UP</button>
       </form>
     </div>
     )
