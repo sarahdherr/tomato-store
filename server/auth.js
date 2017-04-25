@@ -37,8 +37,8 @@ OAuth.setupStrategy({
   provider: 'facebook',
   strategy: require('passport-facebook').Strategy,
   config: {
-    clientID: env.FACEBOOK_CLIENT_ID,
-    clientSecret: env.FACEBOOK_CLIENT_SECRET,
+    clientID: '195743890943143',
+    clientSecret: '1c102a634a001878fd40ab2f74ae8f25',
     callbackURL: `${app.baseUrl}/api/auth/login/facebook`,
   },
   passport
@@ -46,12 +46,13 @@ OAuth.setupStrategy({
 
 // Google needs the GOOGLE_CLIENT_SECRET AND GOOGLE_CLIENT_ID
 // environment variables.
+// console.log(env)
 OAuth.setupStrategy({
   provider: 'google',
   strategy: require('passport-google-oauth').OAuth2Strategy,
   config: {
-    clientID: env.GOOGLE_CLIENT_ID,
-    clientSecret: env.GOOGLE_CLIENT_SECRET,
+    clientID: '650874526466-5ntueo102rjcqgcvenommbsjg6r7r86m.apps.googleusercontent.com',
+    clientSecret: 'CejGFMkRWe1bkdqIE5Wq85n3',
     callbackURL: `${app.baseUrl}/api/auth/login/google`,
   },
   passport
@@ -63,8 +64,8 @@ OAuth.setupStrategy({
   provider: 'github',
   strategy: require('passport-github2').Strategy,
   config: {
-    clientID: env.GITHUB_CLIENT_ID,
-    clientSecret: env.GITHUB_CLIENT_SECRET,
+    clientID: 'ecd94326a61cf213149f',
+    clientSecret: '204cd59d184d9d627a7104d0bc7e0cebc1cb5557',
     callbackURL: `${app.baseUrl}/api/auth/login/github`,
   },
   passport

@@ -6,6 +6,19 @@ import axios from 'axios'
 function handleGoogle(evt) {
   axios.get('/api/auth/login/google')
     .then(response => console.log(response.data))
+    .catch(err => console.error(err))
+}
+
+function handleFacebook(evt) {
+  axios.get('/api/auth/login/facebook')
+    .then(response => console.log(response.data))
+    .catch(err => console.error(err))
+}
+
+function handleGithub(evt) {
+  axios.get('/api/auth/login/github')
+    .then(response => console.log(response.data))
+    .catch(err => console.error(err))
 }
 
 export const Login = ({ login }) => (
@@ -27,9 +40,9 @@ export const Login = ({ login }) => (
         <button type="submit" value="Login">LOGIN</button>
       </form>
 
-      <button type="submit" >Facebook</button>
+      <button type="submit" onClick={handleFacebook}>Facebook</button>
       <button type="submit" onClick={handleGoogle}>Google</button>
-      <button type="submit" >Github</button>
+      <button type="submit" onClick={handleGithub}>Github</button>
   </div>
 )
 
