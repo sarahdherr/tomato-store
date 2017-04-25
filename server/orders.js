@@ -6,7 +6,6 @@ const Product = db.model('product')
 const OrderItem = db.model('order_item')
 const Promise = require('bluebird')
 
-
 module.exports = require('express').Router()
   // Adds an order with all the order items to the Order and OrderItem models
   .post('/', function(req, res, next) {
