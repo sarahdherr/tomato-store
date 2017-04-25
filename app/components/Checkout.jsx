@@ -1,9 +1,6 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router'
+import { Link, browserHistory } from 'react-router'
 import axios from 'axios'
-
-
-
 
 export default class Checkout extends Component {
   constructor(props) {
@@ -21,26 +18,7 @@ export default class Checkout extends Component {
     }
 
     this.handleChange = this.handleChange.bind(this)
-    this.handleAddress = this.handleAddress.bind(this)
-    this.handleSubmitOrder = this.handleSubmitOrder.bind(this)
     this.handleSaveAndPay = this.handleSaveAndPay.bind(this)
-    // NOTE MAYBE SHOULD PUT REDUCER-USING SUBMIT ORDER BACK IN CONTAINER
-  }
-
-  handleAddress = function() {
-    let emptyFieldsArr = []
-    Object.keys(this.state.guestEntry).map(key => {
-      if (this.state.guestEntry[key] === '') {
-        emptyFieldsArr.push(key)
-      }
-    })
-
-    if (emptyFieldsArr.length) {
-      alert('Please fill in empty feilds: ' + emptyFieldsArr.join(', '))
-    } else {
-      alert('Shipping information accepted.')
-      this.setState({ validAddress: true })
-    }
   }
 
   handleChange = function(e) {
@@ -49,25 +27,29 @@ export default class Checkout extends Component {
       guestEntry: { ...this.state.guestEntry, [e.target.name]: e.target.value }
     })
   }
-
-
-
+// NOTE: We only want to create a guest if there is no user logeed in; so we will
+//   want to create a "createGuestORAssociateUserWithOrderId" reducer
   handleSaveAndPay = function(e) {
+    // Think try handle validation outside bttn
     e.preventDefault()
-    handleAddress() // acts as a break with the alerts about address if necessary
-    if (this.state.validAddress) {
-      this.props.createGuest(this.state.guestEntry, this.props.orderId)
+    let emptyFieldsArr = []
+    Object.keys(this.state.guestEntry).map(key => {
+      if (this.state.guestEntry[key] === '') {
+        emptyFieldsArr.push(key)
+      }
+    })
+    if (emptyFieldsArr.length) {
+      alert('Please fill in empty feilds: ' + emptyFieldsArr.join(', '))
     } else {
-      alert('Please complete shipping and payment information.')
+      this.props.createGuest(this.state.guestEntry, this.props.orderId)
+      browserHistory.push(`/paypal/${this.props.orderId}`)
     }
   }
 
   render() {
     return (
       <div>
-
-      { !this.state.showPayment ?
-            (<form id="guest-address" className="form-horizontal">
+          <form id="guest-address" className="form-horizontal">
         <fieldset>
           <legend>Shipping Info</legend>
           <div className="form-group">
@@ -193,12 +175,12 @@ export default class Checkout extends Component {
                       value={this.state.guestEntry.email} />
             </div>
           </div>
+          <br />
+          <hr/>
         <legend>Please Pay via PayPal</legend>
-        <br />
-        <hr/>
-          <button className="btn-danger" type="submit" form="guest-address" onClick={this.handleSaveAndPay}><Link to={`/paypal/${this.props.orderId}`}>Submit</Link></button>
+          <button className="btn" type="submit" form="guest-address" onClick={this.handleSaveAndPay}>Submit</button>
         </fieldset>
-      </form>) : }
+      </form>
     </div>
     )
   }
