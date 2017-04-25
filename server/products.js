@@ -8,7 +8,8 @@ const Product = db.model('product')
 
 module.exports = require('express').Router()
   .get('/', function(req, res, next) {
-    Product.findAll()
+    Product.findAll(
+      {order: 'name'})
       .then(products => res.send(products))
       .catch(next)
   })
@@ -27,5 +28,3 @@ module.exports = require('express').Router()
     })
     .catch(next)
   })
-
-
