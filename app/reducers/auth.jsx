@@ -40,4 +40,11 @@ export const whoami = () =>
       })
       .catch(failed => dispatch(authenticated(null)))
 
+export const signup = user => 
+  dispatch => 
+    axios.post('/api/users', user)
+      .then(response => dispatch(authenticated(response.data)))
+      .then(() => browserHistory.push('/products'))
+      .catch(err => console.error(err))
+
 export default reducer

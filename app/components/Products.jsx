@@ -7,10 +7,10 @@ const Products = ({products=[]}) =>
       {
         products.map(product => {
           return (
-            <div className="product-item col-lg-4" key={product.id}>
-            <Link to={`/products/${product.id}`}><img className="product-img" src={product.imageURL} /></Link>
-            <p>{product.name}</p>
-          </div>)
+            <div className="product-item col-md-12 col-lg-6 col-xl-4" key={product.id}>
+              <Link to={`/products/${product.id}`}><img className="product-img" src={product.imageURL} /></Link>
+              <p>{product.name}</p>
+            </div>)
         })
       }
     </div>
