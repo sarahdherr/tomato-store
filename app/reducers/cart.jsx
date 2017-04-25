@@ -85,7 +85,6 @@ export const clearedCart = () => ({
 export const itemIncrement = (productId) =>
   dispatch => {
     const cart = getCartLocal()
-    console.log('cart in reducer', cart)
     !cart[productId] ? cart[productId] = 1 : cart[productId]++
     // if (cart[productId] < 1) delete cart[productId]
     setCartLocal(cart)
