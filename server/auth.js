@@ -46,6 +46,7 @@ OAuth.setupStrategy({
 
 // Google needs the GOOGLE_CLIENT_SECRET AND GOOGLE_CLIENT_ID
 // environment variables.
+// console.log(env)
 OAuth.setupStrategy({
   provider: 'google',
   strategy: require('passport-google-oauth').OAuth2Strategy,
@@ -92,6 +93,13 @@ passport.deserializeUser(
       })
   }
 )
+
+// vv This is what I added to include "Access-Control-Allow-Origin" header
+auth.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+})
 
 // require.('passport-local').Strategy => a function we can use as a constructor, that takes in a callback
 passport.use(new (require('passport-local').Strategy)(
@@ -140,6 +148,7 @@ auth.get('/login/:strategy', (req, res, next) =>
 auth.post('/logout', (req, res) => {
   req.logout()
   res.redirect('/api/auth/whoami')
+  res.send({})
 })
 
 module.exports = auth

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router'
-import { fetchCart, changeItemQuantity } from 'APP/app/reducers/cart'
+import { fetchCart, changeItemQuantity, itemIncrement } from 'APP/app/reducers/cart'
 import store from 'APP/app/store'
 
 const Product = (product = {}) => {
@@ -9,7 +9,7 @@ const Product = (product = {}) => {
   // WE THINK THAT WOULD JUST BE A CSS CLASS FOR GREYSCALE.
   // ALSO PENDING: MAKING A LINK TO THE CART VIEW
   function onClick(e) {
-    store.dispatch(changeItemQuantity(product.id))
+    store.dispatch(itemIncrement(product.id))
   }
 
   return (

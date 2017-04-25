@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router'
 
 export default class extends React.Component {
   constructor(props) {
@@ -24,6 +25,7 @@ export default class extends React.Component {
     evt.preventDefault()
     console.log(this.state)
     this.props.setUser(this.state)
+
   }
 
   render() {
@@ -43,10 +45,10 @@ export default class extends React.Component {
 
         <div>
           <label>Password:</label>
-          <input name='password' onChange={this.handleChange} />
+          <input name='password' type='password' onChange={this.handleChange} />
         </div>
 
-        <button type='submit' value='Sign Up'>SIGN UP</button>
+        <button type='submit' value='Sign Up'><Link to='/products'>SIGN UP</Link></button>
       </form>
     </div>
     )
