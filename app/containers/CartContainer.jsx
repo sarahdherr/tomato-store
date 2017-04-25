@@ -5,7 +5,7 @@ import { checkoutCart, itemIncrement, itemDecrement, removeItem } from '../reduc
 const mapStateToProps = (state) => {
   return {
     cart: state.cart.list,
-    userId: state.user.userInfo.id
+    userId: state.user && state.user.id
   }
 }
 

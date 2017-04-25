@@ -1,21 +1,12 @@
 import axios from 'axios'
 
-const intitialState = {
-  userInfo: {
-    id: null
-  }
-}
-
-const reducer = (state=intitialState, action) => {
-  const newState = Object.assign({}, state)
-
+const reducer = (state=null, action) => {
   switch (action.type) {
   case GET_USER:
-    newState.userInfo = action.user
-    break
+    return action.user
   }
 
-  return newState
+  return state
 }
 
 // User constants
