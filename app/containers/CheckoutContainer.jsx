@@ -1,24 +1,19 @@
 import { connect } from 'react-redux'
 import Checkout from 'APP/app/components/Checkout'
 import store from 'APP/app/store'
-import { postGuest, createGuest } from 'APP/app/reducers/guest'
-import { clearCart } from 'APP/app/reducers/cart'
-
-const handleSubmitOrder = (guestEntry, orderId) => {
-  store.dispatch(postGuest(guestEntry, orderId))
-  store.dispatch(clearCart())
-}
+import { createGuest, createdGuest } from 'APP/app/reducers/guest'
+// dispatcher; action creator pair
 
 const mapStateToProps = (state) =>
     ({
       orderId: state.cart.orderId,
-      handleSubmitOrder
+      createGuest
     })
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    createGuest(guestInfo) {
-      dispatch(createGuest(guestInfo))
+    createdGuest(guestInfo) {
+      dispatch(createdGuest(guestInfo))
     }
   }
 }

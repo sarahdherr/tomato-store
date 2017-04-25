@@ -1,11 +1,11 @@
 import axios from 'axios'
 
 // Dispatchers
-export const postGuest = (guestEntry, orderId) =>
+export const createGuest = (guestEntry, orderId) =>
   dispatch => {
-    axios.post(`/api/guests`, { orderId, guestEntry })
+    axios.post(`/api/guests`, { orderId, guestEntry }) // !
       .then(response => {
-        dispatch(createGuest(response.data))
+        dispatch(createdGuest(response.data))
       })
       .catch(err => console.error(err))
   }
@@ -14,7 +14,7 @@ export const postGuest = (guestEntry, orderId) =>
 const CREATED_GUEST = 'CREATED_GUEST'
 
 // Products action creators
-export const createGuest = guest => ({
+export const createdGuest = guest => ({
   type: CREATED_GUEST,
   guest
 })

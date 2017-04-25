@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import { Link } from 'react-router'
 import axios from 'axios'
 
+
+
+
 export default class Checkout extends Component {
   constructor(props) {
     super(props)
@@ -15,21 +18,16 @@ export default class Checkout extends Component {
         email: ''
       },
       validAddress: false,
-      showPayment: false,
-      validPayment: false
     }
 
     this.handleChange = this.handleChange.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
-    this.handlePaypalButton = this.handlePaypalButton.bind(this)
     this.handleAddress = this.handleAddress.bind(this)
-    this.handlePaymentSubmit = this.handlePaymentSubmit.bind(this)
-    this.handlePaypalLogin = this.handlePaypalLogin.bind(this)
+    this.handleSubmitOrder = this.handleSubmitOrder.bind(this)
+    this.handleSaveAndPay = this.handleSaveAndPay.bind(this)
+    // NOTE MAYBE SHOULD PUT REDUCER-USING SUBMIT ORDER BACK IN CONTAINER
   }
 
-  handleAddress = function(e) {
-    e.preventDefault()
-
+  handleAddress = function() {
     let emptyFieldsArr = []
     Object.keys(this.state.guestEntry).map(key => {
       if (this.state.guestEntry[key] === '') {
@@ -52,33 +50,13 @@ export default class Checkout extends Component {
     })
   }
 
-  handlePaymentSubmit = function(e) {
-    e.preventDefault()
-    console.log(this.state)
-    if (!this.state.validAddress) {
-      alert('Please fill in shipping info first.')
-    } else {
-      this.setState({ showPayment: true })
-    }
-  }
 
-  handlePaypalLogin = function(e) {
-    e.preventDefault()
-    this.setState({ showPayment: false, validPayment: true })
-  }
 
-  handlePaypalButton = function(e) {
+  handleSaveAndPay = function(e) {
     e.preventDefault()
-    // use props.orderId to change order's status to confirmed
-    axios.put(`api/orders/${this.props.orderId}`, {status: 'confirmed'})
-    .then(() => this.setState({ showPayment: true, validPayment: true }))
-    .catch(err => console.error(err))
-  }
-
-  handleSubmit = function(e) {
-    e.preventDefault()
-    if (this.state.validAddress && this.state.validPayment) {
-      this.props.handleSubmitOrder(this.state.guestEntry, this.props.orderId)
+    handleAddress() // acts as a break with the alerts about address if necessary
+    if (this.state.validAddress) {
+      this.props.createGuest(this.state.guestEntry, this.props.orderId)
     } else {
       alert('Please complete shipping and payment information.')
     }
@@ -177,6 +155,7 @@ export default class Checkout extends Component {
               <option value="OK">Oklahoma</option>
               <option value="OR">Oregon</option>
               <option value="PA">Pennsylvania</option>
+              <option value="PR">Puerto Rico</option>
               <option value="RI">Rhode Island</option>
               <option value="SC">South Carolina</option>
               <option value="SD">South Dakota</option>
@@ -214,27 +193,12 @@ export default class Checkout extends Component {
                       value={this.state.guestEntry.email} />
             </div>
           </div>
-          <button className="btn" onClick={this.handleAddress}>Submit Address</button>
-        <legend>Payment Info</legend>
-        <button className="btn" onClick={this.handlePaypalButton}>Paypal</button>
+        <legend>Please Pay via PayPal</legend>
         <br />
         <hr/>
-          <button className="btn-danger" type="submit" form="guest-address" onClick={this.handleSubmit}><Link to={`/receipt/${this.props.orderId}`}>Submit Order</Link></button>
+          <button className="btn-danger" type="submit" form="guest-address" onClick={this.handleSaveAndPay}><Link to={`/paypal/${this.props.orderId}`}>Submit</Link></button>
         </fieldset>
-      </form>) : (
-      <div>
-        <h1>Welcome to PayPal</h1>
-        <h3>Please log in</h3>
-        <form onSubmit={this.handlePaypalLogin}>
-          <label>Username: </label>
-          <input />
-
-          <label>Password: </label>
-          <input />
-
-          <button type="submit">Log In</button>
-        </form>
-      </div>)}
+      </form>) : }
     </div>
     )
   }
