@@ -19,8 +19,6 @@ const Cart = (props) => {
     props.removeItem(e.target.value)
   }
 
-  // TODOD:  + - Bttns to Quatntity td in table.
-  console.log('props are', props)
   return (
     <div>
     <h2>Cart</h2>
