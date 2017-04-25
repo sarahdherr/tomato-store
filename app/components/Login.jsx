@@ -1,5 +1,5 @@
 import React from 'react'
-import {login} from 'APP/app/reducers/auth'
+import {login, logout} from 'APP/app/reducers/auth'
 import {connect} from 'react-redux'
 import {Link} from 'react-router'
 import axios from 'axios'
@@ -22,13 +22,8 @@ function handleGithub(evt) {
     .catch(err => console.error(err))
 }
 
-function handleLogout(evt) {
-  axios.get('/api/auth/logout')
-    .then(response => console.log(response.data))
-    .catch(err => console.error(err))
-}
-
-export const Login = ({ login }) => (
+// NOTE: Currently once you sign up, you must log in. Should we change this?
+export const Login = ({ login, logout }) => (
   <div>
     <h3>Log in</h3>
       <form className='form-horizontal' onSubmit={evt => {
@@ -52,13 +47,13 @@ export const Login = ({ login }) => (
       <button type="submit" onClick={handleGithub}>Github</button>
 
       <div className="clearfix">
-        <Link to='/products'><button type="submit" onClick={handleLogout}>Logout</button></Link>
+        <button type="submit" onClick={ (evt) => logout() }>Logout</button>
       </div>
   </div>
 )
 
 export default connect(
   state => ({}),
-  {login}
+  {login, logout}
 )(Login)
 
