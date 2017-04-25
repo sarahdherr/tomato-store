@@ -6,9 +6,11 @@ export default class AppContainer extends Component {
     return (
       <div className="app-container">
         <NavbarContainer />
+        <div className="underNav">
         {
           this.props.children && React.cloneElement(this.props.children)
         }
+        </div>
       </div>
     )
   }
