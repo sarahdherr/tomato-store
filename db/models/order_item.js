@@ -12,7 +12,7 @@ module.exports = db => db.define('order_item', {
     subtotal: function() {
       const quantity = this.quantity
       return Product.findById(this.product_id)
-        .then(product => 
+        .then(product =>
           quantity * product.price
         )
         .catch(err => console.error(err))
