@@ -3,23 +3,38 @@ import { Link } from 'react-router'
 import { fetchCart, changeItemQuantity, itemIncrement } from 'APP/app/reducers/cart'
 import store from 'APP/app/store'
 
+const fake = {
+  description: 'This tomato is bright red when ripe. The average weight is 50 grams, with a flavonoid content of 100 mg/gm. '
+}
+
 const Product = (product = {}) => {
-  // HOW TO DEAL WITH ISSUE OF PRODUCTS THAT ARE OUT OF STOCK?
-  // I WOULD IDEALLY LIKE THE IMAGE TO BECOME GREYSCALE.
-  // WE THINK THAT WOULD JUST BE A CSS CLASS FOR GREYSCALE.
-  // ALSO PENDING: MAKING A LINK TO THE CART VIEW
   function onClick(e) {
     store.dispatch(itemIncrement(product.id))
   }
 
   return (
-          <div className="jumbotron">
+          <div className="jumbotron product-view">
             <h1>{ product.name }</h1>
-            <img src={ product.imageURL } />
-            <p>${product.price}</p>
-            <p>Remaining stock is only... {product.inventory}</p>
+            <div className="col-xs-6">
+              <img className="product-view-image" src={ product.imageURL } />
+            </div>
+            <div className="col-xs-6 product-info">
+              
+              <p>Price: ${product.price}</p>
+              {
+                product.inventory < 5 ? (
+                  <p>Remaining stock is only... {product.inventory}</p>
+                ) : (
+                  <p>Stock: {product.inventory}</p>
+                )
+              }
+              <p className="product-desc">Description: {fake.description}</p>
+              <p><a className="btn btn-primary btn-lg" onClick= { onClick }>Add To Cart</a></p>
+            </div>
+            
+
+            
             {/* <p>NutritionFacts pending: {nutritionFacts}</p> */}
-            <p><a className="btn btn-primary btn-lg" onClick= { onClick }>Add To Cart</a></p>
           </div>
   )
 }
