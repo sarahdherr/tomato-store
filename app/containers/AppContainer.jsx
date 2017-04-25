@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import NavbarContainer from './NavbarContainer';
+import React, {Component} from 'react'
+import NavbarContainer from './NavbarContainer'
 
 export default class AppContainer extends Component {
   render() {
