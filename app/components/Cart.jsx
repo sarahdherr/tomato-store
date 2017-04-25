@@ -9,7 +9,6 @@ const Cart = (props) => {
 
   const itemIncrement = (e) => {
     props.itemIncrement(e.target.value)
-    console.log('e.target', e.target.value)
   }
 
   const itemDecrement = (e) => {
