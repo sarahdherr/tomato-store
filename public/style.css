@@ -45,6 +45,21 @@
 	margin-top: 2%;
 }
 
+.logout-container {
+	text-align: center;
+	vertical-align: center;
+	margin-top: 10vh;
+}
+
+.goodbye-container {
+	margin-top: 10vh;
+	padding-left: 5vw;
+}
+
+.goodbye-tom {
+	width: 100%;
+}
+
 .navbar {
 	overflow: hidden;
     position: fixed; /* Set the navbar to fixed position */

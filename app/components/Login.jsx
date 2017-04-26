@@ -28,7 +28,9 @@ export const Login = ({ login, logout, user }) => {
           </form>
           
       </div>
-      : <div></div>
+      : <div className='goodbye-container'>
+        <img className='goodbye-tom' src='https://previews.123rf.com/images/chudtsankov/chudtsankov1502/chudtsankov150200025/36131533-Happy-Tomato-Cartoon-Mascot-Character-Waving-Illustration-Isolated-On-White-Stock-Vector.jpg' />
+      </div>
       }
     </div>
   )

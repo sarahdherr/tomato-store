@@ -52,7 +52,7 @@ export default class extends React.Component {
         </div>
       </form>
       </div>
-      : <div>
+      : <div className='logout-container'>
       <h3>You are Logged in.</h3>
       <button type='submit' onClick={ (e) => this.props.logout() }>Logout</button>
       </div>
