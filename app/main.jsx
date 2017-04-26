@@ -18,6 +18,7 @@ import CartContainer from './containers/CartContainer'
 import CheckoutContainer from './containers/CheckoutContainer'
 import ReceiptContainer from './containers/ReceiptContainer'
 import SignUpContainer from './containers/SignUpContainer'
+import PayPalContainer from './containers/PayPalContainer'
 
 import Jokes from './components/Jokes'
 import Login from './components/Login'
@@ -57,6 +58,7 @@ render(
         <Route path="/products/:id" component={ProductContainer} onEnter={onProductEnter} />
         <Route path="/cart" component={CartContainer} onEnter={onCartEnter} />
         <Route path="/checkout" component={CheckoutContainer} />
+        <Route path="/paypal/:orderId" component={PayPalContainer} />
         <Route path="/login" component={LoginSignup} />
         <Route path="/receipt/:orderId" component={ReceiptContainer} onEnter={onReceiptEnter} />
       </Route>

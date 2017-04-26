@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router'
+import { Link, browserHistory } from 'react-router'
 import axios from 'axios'
 
 export default class Checkout extends Component {
@@ -15,34 +15,10 @@ export default class Checkout extends Component {
         email: ''
       },
       validAddress: false,
-      showPayment: false,
-      validPayment: false
     }
 
     this.handleChange = this.handleChange.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
-    this.handlePaypalButton = this.handlePaypalButton.bind(this)
-    this.handleAddress = this.handleAddress.bind(this)
-    this.handlePaymentSubmit = this.handlePaymentSubmit.bind(this)
-    this.handlePaypalLogin = this.handlePaypalLogin.bind(this)
-  }
-
-  handleAddress = function(e) {
-    e.preventDefault()
-
-    let emptyFieldsArr = []
-    Object.keys(this.state.guestEntry).map(key => {
-      if (this.state.guestEntry[key] === '') {
-        emptyFieldsArr.push(key)
-      }
-    })
-
-    if (emptyFieldsArr.length) {
-      alert('Please fill in empty feilds: ' + emptyFieldsArr.join(', '))
-    } else {
-      alert('Shipping information accepted.')
-      this.setState({ validAddress: true })
-    }
+    this.handleSaveAndPay = this.handleSaveAndPay.bind(this)
   }
 
   handleChange = function(e) {
@@ -51,45 +27,29 @@ export default class Checkout extends Component {
       guestEntry: { ...this.state.guestEntry, [e.target.name]: e.target.value }
     })
   }
-
-  handlePaymentSubmit = function(e) {
+// NOTE: We only want to create a guest if there is no user logeed in; so we will
+//   want to create a "createGuestORAssociateUserWithOrderId" reducer
+  handleSaveAndPay = function(e) {
+    // Think try handle validation outside bttn
     e.preventDefault()
-    console.log(this.state)
-    if (!this.state.validAddress) {
-      alert('Please fill in shipping info first.')
+    let emptyFieldsArr = []
+    Object.keys(this.state.guestEntry).map(key => {
+      if (this.state.guestEntry[key] === '') {
+        emptyFieldsArr.push(key)
+      }
+    })
+    if (emptyFieldsArr.length) {
+      alert('Please fill in empty feilds: ' + emptyFieldsArr.join(', '))
     } else {
-      this.setState({ showPayment: true })
-    }
-  }
-
-  handlePaypalLogin = function(e) {
-    e.preventDefault()
-    this.setState({ showPayment: false, validPayment: true })
-  }
-
-  handlePaypalButton = function(e) {
-    e.preventDefault()
-    // use props.orderId to change order's status to confirmed
-    axios.put(`api/orders/${this.props.orderId}`, {status: 'confirmed'})
-    .then(() => this.setState({ showPayment: true, validPayment: true }))
-    .catch(err => console.error(err))
-  }
-
-  handleSubmit = function(e) {
-    e.preventDefault()
-    if (this.state.validAddress && this.state.validPayment) {
-      this.props.handleSubmitOrder(this.state.guestEntry, this.props.orderId)
-    } else {
-      alert('Please complete shipping and payment information.')
+      this.props.createGuest(this.state.guestEntry, this.props.orderId)
+      browserHistory.push(`/paypal/${this.props.orderId}`)
     }
   }
 
   render() {
     return (
       <div>
-
-      { !this.state.showPayment ?
-            (<form id="guest-address" className="form-horizontal">
+          <form id="guest-address" className="form-horizontal">
         <fieldset>
           <legend>Shipping Info</legend>
           <div className="form-group">
@@ -177,6 +137,7 @@ export default class Checkout extends Component {
               <option value="OK">Oklahoma</option>
               <option value="OR">Oregon</option>
               <option value="PA">Pennsylvania</option>
+              <option value="PR">Puerto Rico</option>
               <option value="RI">Rhode Island</option>
               <option value="SC">South Carolina</option>
               <option value="SD">South Dakota</option>
@@ -214,27 +175,12 @@ export default class Checkout extends Component {
                       value={this.state.guestEntry.email} />
             </div>
           </div>
-          <button className="btn" onClick={this.handleAddress}>Submit Address</button>
-        <legend>Payment Info</legend>
-        <button className="btn" onClick={this.handlePaypalButton}>Paypal</button>
-        <br />
-        <hr/>
-          <button className="btn-danger" type="submit" form="guest-address" onClick={this.handleSubmit}><Link to={`/receipt/${this.props.orderId}`}>Submit Order</Link></button>
+          <br />
+          <hr/>
+        <legend>Please Pay via PayPal</legend>
+          <button className="btn" type="submit" form="guest-address" onClick={this.handleSaveAndPay}>Submit</button>
         </fieldset>
-      </form>) : (
-      <div>
-        <h1>Welcome to PayPal</h1>
-        <h3>Please log in</h3>
-        <form onSubmit={this.handlePaypalLogin}>
-          <label>Username: </label>
-          <input />
-
-          <label>Password: </label>
-          <input />
-
-          <button type="submit">Log In</button>
-        </form>
-      </div>)}
+      </form>
     </div>
     )
   }
