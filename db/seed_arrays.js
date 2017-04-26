@@ -1,5 +1,5 @@
 const tomatoes = {
-  tomato1: {name: 'Ananasove Zlte', imageURL: 'https://www.ethno-botanik.org/Tomaten/Ananasove_Zlte/Fotos/300/Ananasove_Zlte_9.jpg', inventory: 100, price: 3},
+  tomato1: {name: 'Ananasove Zlte', imageURL: 'https://www.ethno-botanik.org/Tomaten/Ananasove_Zlte/Fotos/300/Ananasove_Zlte_9.jpg', inventory: 6, price: 3},
   tomato2: {name: 'Black & Red Boar', imageURL: 'https://www.ethno-botanik.org/Tomaten/Black-Red-Boar/Fotos/300/Black-Red-Boar--4.jpg', inventory: 100, price: 3},
   tomato3: {name: 'Carabobo', imageURL: 'https://www.ethno-botanik.org/Tomaten/Carabobo/Fotos/300/Carabobo-2.jpg', inventory: 100, price: 3},
   tomato4: {name: 'Caro Rich', imageURL: 'https://www.ethno-botanik.org/Tomaten/Caro_Rich/Fotos/300/Caro-Rich-04.jpg', inventory: 100, price: 3},
