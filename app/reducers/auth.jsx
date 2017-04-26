@@ -46,8 +46,7 @@ export const setUser = (user) =>
       .then(response => {
         dispatch(authenticated(response.data))
       })
-      .then(() => browserHistory.push('/products')
-      )
+      .then(() => browserHistory.push('/products'))
       .catch(err => console.error(err))
 
 export default reducer
