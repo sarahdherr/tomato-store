@@ -8,27 +8,29 @@ export const Login = ({ login, logout, user }) => {
   return (
     <div>
       {!user
-      ? <div>
+      ? <div className='login-container'>
         <h3>Log in</h3>
           <form className='form-horizontal' onSubmit={evt => {
             evt.preventDefault()
             login(evt.target.username.value, evt.target.password.value)
           } }>
-            <div>
-              <label>Email:</label>
+            <div className='login-inputs'>
+              <label>Email:    </label>
               <input name="username" />
             </div>
-            <div>
+            <div className='login-inputs'>
               <label>Password:</label>
               <input name="password" type="password" />
             </div>
-            <button type="submit" value="Login">LOGIN</button>
+            <div className='login-button'>
+              <button type="submit" value="Login">LOGIN</button>
+            </div>
           </form>
-          <div className="clearfix">
-            <button type="submit" onClick={ (evt) => logout() }>Logout</button>
-          </div>
+          
       </div>
-      : <div></div>
+      : <div className='goodbye-container'>
+        <img className='goodbye-tom' src='https://previews.123rf.com/images/chudtsankov/chudtsankov1502/chudtsankov150200025/36131533-Happy-Tomato-Cartoon-Mascot-Character-Waving-Illustration-Isolated-On-White-Stock-Vector.jpg' />
+      </div>
       }
     </div>
   )

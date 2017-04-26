@@ -25,6 +25,41 @@
 	float: left;
 }
 
+.login-container {
+	margin-top: 10vh;
+	padding-left: 10vw;
+}
+
+.login-container login-inputs {
+	text-align: center;
+	margin-top: 2%;
+}
+
+.login-container login-button {
+	text-align: center;
+	margin-top: 12%;
+}
+
+.login-container * {
+	text-align: center;
+	margin-top: 2%;
+}
+
+.logout-container {
+	text-align: center;
+	vertical-align: center;
+	margin-top: 10vh;
+}
+
+.goodbye-container {
+	margin-top: 10vh;
+	padding-left: 5vw;
+}
+
+.goodbye-tom {
+	width: 100%;
+}
+
 .navbar {
 	overflow: hidden;
     position: fixed; /* Set the navbar to fixed position */
