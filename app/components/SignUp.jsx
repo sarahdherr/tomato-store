@@ -30,25 +30,26 @@ export default class extends React.Component {
     return (
     <div>
       {!this.props.user
-      ? <div>
-      <h3>Sign Up</h3>
+      ? <div className='login-container'>
+      <h3 className='login-title'>Sign Up</h3>
       <form className='form-horizontal' onSubmit={this.handleSubmit} >
-        <div>
+        <div className='login-inputs'>
           <label>Name:</label>
           <input name='name' onChange={this.handleChange} />
         </div>
 
-        <div>
+        <div className='login-inputs'>
           <label>Email:</label>
           <input name='email' onChange={this.handleChange} />
         </div>
 
-        <div>
+        <div className='login-inputs'>
           <label>Password:</label>
           <input name='password' type='password' onChange={this.handleChange} />
         </div>
-
-        <button type='submit' value='Sign Up'>SIGN UP</button>
+        <div className='login-button'>
+          <button type='submit' value='Sign Up'>SIGN UP</button>
+        </div>
       </form>
       </div>
       : <div>
