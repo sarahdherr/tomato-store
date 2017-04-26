@@ -3,30 +3,21 @@ import {Link} from 'react-router'
 import store from 'APP/app/store'
 import { getCartSize } from 'APP/app/reducers/cart'
 
-const Navbar = (props) => {
-
-  return (
+const Navbar = (props) =>
+ (
     <nav className="navbar navbar-default">
       <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <Link to="/" className="navbar-brand">Home</Link>
 
       <ul className="nav navbar-nav">
-        <li><Link to="/login" activeClassName="active-link">Login</Link></li>
+        <li><Link to="/login" activeClassName="active-link">{!props.user ? 'Login' : 'Logout' }</Link></li>
         <li><Link to="/products" activeClassName="active-link">Products</Link></li>
         <li><Link to="/cart" activeClassName="active-link"><span className="glyphicon glyphicon-shopping-cart"></span>{props.cartSize}</Link></li>
       </ul>
 
-      <form className="navbar-form navbar-right" role="search">
-        <div className="form-group">
-          <input type="text" className="form-control" placeholder="Search" />
-        </div>
-        <button type="submit" className="btn btn-default">Submit</button>
-      </form>
-
       </div>
     </nav>
   )
-}
 
 export default Navbar
 

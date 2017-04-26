@@ -19,10 +19,7 @@ const Receipt = ({orderId, status, cart, guest}) =>
             <td>{guest.address}</td>
           </tr>
           <tr >
-            <td>{guest.city}</td>
-          </tr>
-          <tr >
-            <td>{guest.state}</td>
+            <td>{guest.city}, {guest.state}</td>
           </tr>
           <tr >
             <td>{guest.zip}</td>

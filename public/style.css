@@ -9,6 +9,12 @@
 .product-item {
 	display: inline;
 	float: left;
+	width: 30vw;
+	height: 40vh;
+}
+
+.products {
+	padding-left: 5%
 }
 
 .product-item p {

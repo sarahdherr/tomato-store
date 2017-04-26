@@ -1,15 +1,14 @@
 import { connect } from 'react-redux'
 import SignUp from '../components/SignUp'
-import { setUser } from '../reducers/user'
 
-const mapStateToProps = null
+import { setUser, logout } from '../reducers/auth'
 
-const mapDispatchToProps = (dispatch) => {
+const mapStateToProps = (state) => {
   return {
-    setUser(user) {
-      dispatch(setUser(user))
-    }
+    user: state.auth
   }
 }
+
+const mapDispatchToProps = { setUser, logout }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignUp)
